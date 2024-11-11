@@ -3,8 +3,8 @@ import reactLogo from "./assets/react.svg";
 import "./index.css";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import PortalLayout from "./Components/PortalLayout";
-import Patients from "./Pages/Stock/Patients/Products";
-import AddEditPatient from "./Pages/Stock/Patients/AddEditPatient";
+import Patients from "./Pages/Patient/Patients/Patients";
+import AddEditPatient from "./Pages/Patient/Patients/AddEditPatient";
 import Category from "./Pages/Stock/Category/Category";
 import SubCategory from "./Pages/Stock/SubCategory/SubCategory";
 import Type from "./Pages/Stock/Type/Type";
@@ -43,9 +43,11 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
 
+          {/* // Patient ================================================================= */}
+          <Route path="/patient/patients" element={<Patients />} />
+          <Route path="/patient/patients/AddEdit" element={<AddEditPatient />} />
+
           {/* // Stock ================================================================= */}
-          <Route path="/stock/patients" element={<Patients />} />
-          <Route path="/stock/patients/AddEdit" element={<AddEditPatient />} />
           <Route path="/stock/category" element={<Category />} />
           <Route path="/stock/subCategory" element={<SubCategory />} />
           <Route path="/stock/type" element={<Type />} />

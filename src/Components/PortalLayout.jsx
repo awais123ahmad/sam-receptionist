@@ -320,7 +320,7 @@ export default function PortalLayout({ children }) {
                       !open ? "hidden" : "block"
                     }`}
                   >
-                    Patients
+                    patients
                   </span>
                   <IoIosArrowDown
                     className={`w-4 h-4 ${
@@ -333,10 +333,10 @@ export default function PortalLayout({ children }) {
                 <ul className={`${open1[0] ? "" : "hidden"} w-[100%]`}>
                   <li>
                     <div
-                      onClick={() => route("/stock/patients")}
+                      onClick={() => route("/patient/patients")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
-                        location.pathname === "/stock/patients" ||
-                        location.pathname === "/stock/patients/add"
+                        location.pathname === "/patient/patients" ||
+                        location.pathname === "/patient/patients/add"
                           ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
                           : " mr-2 rounded-md"
                       }  ${open ? "ml-6" : "ml-0"}  `}
@@ -345,13 +345,13 @@ export default function PortalLayout({ children }) {
                         className={`!text-5xl ${
                           open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
                         } rounded-full p-[12px] ml-[-1.2rem] ${
-                          location.pathname === "/stock/patients"
+                          location.pathname === "/patient/patients"
                             ? "bg-white text-gray-600"
                             : ""
                         } `}
                         sx={{
                           boxShadow:
-                            location.pathname === "/stock/patients"
+                            location.pathname === "/patient/patients"
                               ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
                               : "",
                         }}
@@ -365,7 +365,7 @@ export default function PortalLayout({ children }) {
                       </span>
                     </div>
                   </li>
-                  <li>
+                  {/* <li>
                     <div
                       onClick={() => route("/stock/category")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
@@ -571,10 +571,10 @@ export default function PortalLayout({ children }) {
                   </li>
                   <li>
                     <div
-                      onClick={() => route("/stock/patientset")}
+                      onClick={() => route("/patient/patientset")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
-                        location.pathname === "/stock/patientset" ||
-                        location.pathname === "/stock/patientset/add"
+                        location.pathname === "/patient/patientset" ||
+                        location.pathname === "/patient/patientset/add"
                           ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
                           : " mr-2 rounded-md"
                       }  ${open ? "ml-6" : "ml-0"}  `}
@@ -583,13 +583,13 @@ export default function PortalLayout({ children }) {
                         className={`!text-5xl ${
                           open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
                         } rounded-full p-[12px] ml-[-1.2rem] ${
-                          location.pathname === "/stock/patientset"
+                          location.pathname === "/patient/patientset"
                             ? "bg-white text-gray-600"
                             : ""
                         } `}
                         sx={{
                           boxShadow:
-                            location.pathname === "/stock/patientset"
+                            location.pathname === "/patient/patientset"
                               ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
                               : "",
                         }}
@@ -602,7 +602,7 @@ export default function PortalLayout({ children }) {
                         Product Set
                       </span>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
 
                 <div
@@ -619,7 +619,7 @@ export default function PortalLayout({ children }) {
                       !open ? "hidden" : "block"
                     }`}
                   >
-                    Purchase
+                    Dispenser
                   </span>
                   <IoIosArrowDown
                     className={`w-4 h-4 ${
@@ -660,11 +660,11 @@ export default function PortalLayout({ children }) {
                           !open ? "hidden" : "block"
                         }`}
                       >
-                        Supplier
+                        Medical Store
                       </span>
                     </div>
                   </li>
-                  <li>
+                  {/* <li>
                     <div
                       onClick={() => route("/purchase/order")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
@@ -731,10 +731,10 @@ export default function PortalLayout({ children }) {
                         Return
                       </span>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
 
-                <div
+                {/* <div
                   onClick={() => handleSelection(2)}
                   className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem]`}
                 >
@@ -866,7 +866,7 @@ export default function PortalLayout({ children }) {
                       </span>
                     </div>
                   </li>
-                </ul>
+                </ul> */}
 
                 <div
                   onClick={() => handleSelection(3)}
@@ -893,7 +893,7 @@ export default function PortalLayout({ children }) {
                   />
                 </div>
                 <ul className={`${open1[3] ? "" : "hidden"} w-[100%]`}>
-                  <li>
+                  {/* <li>
                     <div
                       onClick={() => route("/account/company")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
@@ -926,7 +926,7 @@ export default function PortalLayout({ children }) {
                         Company
                       </span>
                     </div>
-                  </li>
+                  </li> */}
                   <li>
                     <div
                       onClick={() => route("/account/income")}
@@ -995,7 +995,7 @@ export default function PortalLayout({ children }) {
                       </span>
                     </div>
                   </li>
-                  <li>
+                  {/* <li>
                     <div
                       onClick={() => route("/account/receiptCredit")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
@@ -1096,9 +1096,9 @@ export default function PortalLayout({ children }) {
                         Transaction
                       </span>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
-                <div
+                {/* <div
                   onClick={() => handleSelection(4)}
                   className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem]`}
                 >
@@ -1633,7 +1633,7 @@ export default function PortalLayout({ children }) {
                       </span>
                     </div>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 0 }}>

@@ -367,8 +367,8 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-          <div className="flex-grow-0"></div>
-          <div
+          {/* <div className="flex-grow-0"></div> */}
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -453,14 +453,14 @@ const Dashboard = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div
           style={{ boxShadow: "0 0 4px rgba(0, 0, 0, 0.2)" }}
           className="piechart"
         >
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
                 data={data02}
@@ -665,7 +665,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="stockContainer">
+      {/* <div className="stockContainer">
         <div
           style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", padding: 10 }}
           className="radialbar"
@@ -695,85 +695,10 @@ const Dashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        <div
-          style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", padding: 10 }}
-          className="radialbar"
-        >
-          <div  className="flex gap-8 pl-[20px] pb-2">
-          <h4 className="my-2 font-[600]">Stock Alert</h4>
-            <AiOutlineStock
-              size={30}
-              style={{ color: "red", marginTop:'2px' }}
-            />
-          </div>
-          <div className="paid">
-            {recent?.map((item) => (
-              <div
-                style={{
-                  borderRadius: 5,
-                  backgroundColor: "white",
-                  alignItems: "center",
-                  alignContent: "center",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  marginTop: 8,
-                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-                  padding:6
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    padding: "5px 5px",
-                    width: "90%",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      marginTop: 2,
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      paddingLeft: 10,
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "30%",
-                      }}
-                    >
-                      <p className="text-sm font-[500]">Product Name</p>
-                    </div>
-                    <div  className="flex w-[50%] items-center">
-                      <IoLocationSharp
-                        size={20}
-                      />
-                      <p style={{ fontSize: 14, color: "gray" }}>Address</p>
-                    </div>
-                    <p
-                      style={{
-                        color: "red",
-                        fontWeight: 500,
-                        width: "20%",
-                        textAlign: "right",
-                      }}
-                    >
-                      Stock
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </div> */}
 
       <div className="purchaseContainer">
-        <div
+        {/* <div
           className="purchaseTable"
           style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", padding: 10 }}
         >
@@ -825,8 +750,8 @@ const Dashboard = () => {
            </div>
             ))}
           </div>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", padding: 10 }}
           className="barChart"
         >
@@ -838,10 +763,10 @@ const Dashboard = () => {
               <Tooltip />
               <Legend />
               <Bar dataKey="pv" fill="gray" />
-              {/* <Bar dataKey="uv" fill="red" /> */}
+              <Bar dataKey="uv" fill="red" />
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </div> */}
       </div>
     </div>
   );

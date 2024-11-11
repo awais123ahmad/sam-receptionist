@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useNavigate } from "react";
 import { Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import PaginationComponent from "../../../Components/PaginationComponent";
 import { fetchProducts } from "../../../Api/Reducers/StockReducers/product";
 import { useDispatch, useSelector } from "react-redux";
+import patientService from "../../../Services/patientService";
+import toast from 'react-hot-toast';
 
 const data = [
   { id: 1, name: "john doe", email: "johndoe@gmail.com", role: "user" },
@@ -39,6 +41,25 @@ const Products = () => {
   const [paginatedData, setPaginatedData] = useState([]);
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(false);
+  //const navigate = useNavigate();
+
+  useEffect(() => {
+    const getPatients = async () => {
+      try {
+        setLoading(true);
+        const response = await patientService.fetchAllPatients();
+        setPatients(response.get); // Assuming your response data has 'post'
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        toast.error('Error fetching Patients');
+      }
+    };
+    getPatients();
+  }, []);
 
   // const products = useSelector((state) => state.products.data);
   // const loading = useSelector((state) => state.products.loading);
