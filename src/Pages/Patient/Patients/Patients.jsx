@@ -179,7 +179,7 @@ const Products = () => {
                 </th>
               </tr>
             </thead>
-            {paginatedData.map((value, index) => (
+            {patients.map((value, index) => (
               <tbody className="text-gray-600 text-sm font-light w-[100%] border-t-[1px] border-gray-200">
                 <tr className={` bg-white  `}>
                   <td className="py-[1%] w-[35%] max-md:text-[.7rem] text-left pl-4">
