@@ -1,209 +1,179 @@
-import React from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Button, Container, Divider, Grid } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button, Divider, Grid, TextField, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
+import patientService from "../../../Services/patientService";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddEditPatient = () => {
+  const [patientData, setPatientData] = useState({
+    full_name: "",
+    contact_number: "",
+    gender: "",
+    date_of_birth: "",
+    address: "",
+    checkup_date: "",
+    assigned_doctor: "",
+  });
+
+  const { id } = useParams(); // Get the patient ID from the URL for editing
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      // Fetch patient data for editing
+      const fetchPatientData = async () => {
+        try {
+          const response = await patientService.fetchPatientById(id); // Use the fetchPatientById service method
+          setPatientData(response.patient); // Assuming response has a 'patient' object
+        } catch (error) {
+          toast.error("Error fetching patient data.");
+        }
+      };
+
+      fetchPatientData();
+    }
+  }, [id]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPatientData({ ...patientData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (id) {
+        await patientService.updatePatient(id, patientData);
+        toast.success("Patient updated successfully!");
+      } else {
+        await patientService.create(patientData);
+        toast.success("Patient added successfully!");
+      }
+      navigate("/patients");
+    } catch (error) {
+      toast.error("Error saving patient.");
+    }
+  };
+
   return (
-    <form
-      //    onSubmit={handleSubmit}
-      className="w-[90%] m-auto"
-    >
-      {/* <AddClient setOpen={setOpen} open={open} /> */}
-
-      <h1 className="m-[30px] text-center font-[700] text-[20px]">
-        {/* {id ? 'Edit Product' : 'Add Product'} */}
-        Add Patient
-      </h1>
-
+    <form onSubmit={handleSubmit} className="w-[90%] m-auto">
+      <h1 className="m-[30px] text-center font-[700] text-[20px]">{id ? "Edit Patient" : "Add Patient"}</h1>
       <Divider />
       <div>
         <div className="mt-[20px] flex">
           <div style={{ width: "50%" }}>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
-              }}
-            >
-              Patient Name
-            </h1>
-            <div style={{ display: "block" }}>
-              <input
-                placeholder="Enter Patient Name here"
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                name="product_name"
-                type="text"
-                // onChange={(e) => { setProductData({ ...productData, product_name: e.target.value }) }}
-                // value={productData.product_name}
-                required
-              />
-            </div>
+            <TextField
+              label="Patient Name"
+              variant="outlined"
+              fullWidth
+              name="full_name"
+              value={patientData.full_name}
+              onChange={handleChange}
+              required
+            />
           </div>
-          <div style={{ marginLeft: 20, textAlign: "left", width: "50%" }}>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
-              }}
-            >
-              Phone No.
-            </h1>
-            <div style={{ display: "block" }}>
-              <input
-                placeholder="Enter Phone No. here"
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                name="product_code"
-                type="text"
-                // onChange={(e) => { setProductData({ ...productData, product_code: e.target.value }) }}
-                // value={productData.product_code}
-                // title={id ? "Disabled" : ""}
-                // disabled={id ? true : false}
-                required
-              />
-            </div>
+          <div style={{ marginLeft: 20, width: "50%" }}>
+            <TextField
+              label="Phone No."
+              variant="outlined"
+              fullWidth
+              name="contact_number"
+              value={patientData.contact_number}
+              onChange={handleChange}
+              required
+            />
           </div>
         </div>
+
         <div className="grid grid-cols-3 my-[20px] gap-10">
           <div>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
-              }}
-            >
-              Gender
-            </h1>
-            <div style={{ display: "block" }}>
-              <select
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                //   onChange={(e) => { setCatID(e.target.value) }} disabled={id ? true : false} title={id ? "Disabled" : ""}
+            <FormControl fullWidth>
+              <InputLabel>Gender</InputLabel>
+              <Select
+                label="Gender"
+                name="gender"
+                value={patientData.gender}
+                onChange={handleChange}
                 required
               >
-                <option value="" selected disabled hidden>
-                  Select Gender
-                </option>
-                {/* {categories?.map((row) => (
-                      <CatOpt row={row}/>
-                    ))} */}
-                category
-              </select>
-            </div>
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+            </FormControl>
           </div>
 
           <div>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
+            <TextField
+              label="Date of Birth"
+              variant="outlined"
+              fullWidth
+              type="date"
+              name="date_of_birth"
+              value={patientData.date_of_birth}
+              onChange={handleChange}
+              required
+              InputLabelProps={{
+                shrink: true,
               }}
-            >
-              Date of Birth
-            </h1>
-            <div style={{ display: "block" }}>
-              <input
-                type="date"
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                required
-              />
-            </div>
+            />
           </div>
         </div>
-
-        {/*</Grid>*/}
 
         <div>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
-              }}
-            >
-              Residential Address
-            </h1>
-            <div style={{ display: "block" }}>
-              <input
-                placeholder="Enter House Address here"
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                name="product_name"
-                type="text"
-                // onChange={(e) => { setProductData({ ...productData, product_name: e.target.value }) }}
-                // value={productData.product_name}
-                required
-              />
-            </div>
-          </div>
+          <TextField
+            label="Residential Address"
+            variant="outlined"
+            fullWidth
+            name="address"
+            value={patientData.address}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-
-          <div className="grid grid-cols-3 my-[20px] gap-10">
-         
-
+        <div className="grid grid-cols-3 my-[20px] gap-10">
           <div>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
+            <TextField
+              label="CheckUp Date"
+              variant="outlined"
+              fullWidth
+              type="date"
+              name="checkup_date"
+              value={patientData.checkup_date}
+              onChange={handleChange}
+              required
+              InputLabelProps={{
+                shrink: true,
               }}
-            >
-              CheckUp Date
-            </h1>
-            <div style={{ display: "block" }}>
-              <input
-                type="date"
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                required
-              />
-            </div>
+            />
           </div>
 
           <div>
-            <h1
-              style={{
-                color: "black",
-                paddingRight: "3px",
-                fontWeight: "600",
-              }}
-            >
-              Assigned Doctor
-            </h1>
-            <div style={{ display: "block" }}>
-              <select
-                className="block px-3 py-3 w-full text-sm leading-tight text-gray-700 bg-white border rounded-xl transition duration-300 ease-in-out focus:border-blue-500"
-                //   onChange={(e) => { setCatID(e.target.value) }} disabled={id ? true : false} title={id ? "Disabled" : ""}
-                required
-              >
-                <option value="" selected disabled hidden>
-                  Select Doctor
-                </option>
-                {/* {categories?.map((row) => (
-                      <CatOpt row={row}/>
-                    ))} */}
-                Helllll
-              </select>
-            </div>
+            <TextField
+              label="Assigned Doctor"
+              variant="outlined"
+              fullWidth
+              name="assigned_doctor"
+              value={patientData.assigned_doctor}
+              onChange={handleChange}
+              required
+            />
           </div>
         </div>
-    
-      {/* <button className={styles.submitButton} type="submit">Save and continue</button> */}
-      <Grid container style={{ justifyContent: "center", marginTop: "30px" }}>
-        <Button
-          variant="contained"
-          style={{ justifyContentContent: "center", borderRadius: "10px" }}
-          type="submit"
-          color="primary"
-          size="large"
-          className="!bg-[#007fff] !text-white"
-        >
-          Save and Continue
-        </Button>
-      </Grid>
 
+        <Grid container style={{ justifyContent: "center", marginTop: "30px" }}>
+          <Button
+            variant="contained"
+            type="submit"
+            color="primary"
+            size="large"
+            className="!bg-[#007fff] !text-white"
+            style={{ borderRadius: "10px" }}
+          >
+            Save and Continue
+          </Button>
+        </Grid>
       </div>
     </form>
   );
