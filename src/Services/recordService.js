@@ -1,17 +1,17 @@
 import axiosInstance from "./axiosInstance";
 
-const patientService = {
+const recordService = {
     create: async (payload) => {
         try {
-            const response = await axiosInstance.post('/patients/create', payload);
+            const response = await axiosInstance.post('/medical-records/create', payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
-    fetchAllPatients: async () => {
+    fetchAll: async () => {
         try {
-            const response = await axiosInstance.get('/patients/all');
+            const response = await axiosInstance.get('/medical-records/all');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -19,23 +19,23 @@ const patientService = {
     },
     fetchTotal: async () => {
         try {
-            const response = await axiosInstance.get('/patients/total');
+            const response = await axiosInstance.get('/medical-records/total');
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
-    fetchPatientById: async (id) => {
+    fetchById: async (id) => {
         try {
-            const response = await axiosInstance.get('/patients/get/' + id);
+            const response = await axiosInstance.get('/medical-records/id/' + id);
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
-    updatePatient: async (id, payload) => {
+    update: async (id, payload) => {
         try {
-            const response = await axiosInstance.put(`/patients/edit/${id}`, payload);
+            const response = await axiosInstance.put(`/medical-records/edit/${id}`, payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -43,4 +43,4 @@ const patientService = {
     },
 };
 
-export default patientService;
+export default recordService;

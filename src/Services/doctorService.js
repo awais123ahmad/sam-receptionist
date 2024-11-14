@@ -1,17 +1,17 @@
 import axiosInstance from "./axiosInstance";
 
-const patientService = {
+const doctorService = {
     create: async (payload) => {
         try {
-            const response = await axiosInstance.post('/patients/create', payload);
+            const response = await axiosInstance.post('/doctor/create', payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
-    fetchAllPatients: async () => {
+    fetchAllDoctors: async () => {
         try {
-            const response = await axiosInstance.get('/patients/all');
+            const response = await axiosInstance.get('/doctor/all');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -19,7 +19,7 @@ const patientService = {
     },
     fetchTotal: async () => {
         try {
-            const response = await axiosInstance.get('/patients/total');
+            const response = await axiosInstance.get('/doctor/total');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -27,7 +27,7 @@ const patientService = {
     },
     fetchPatientById: async (id) => {
         try {
-            const response = await axiosInstance.get('/patients/get/' + id);
+            const response = await axiosInstance.get('/doctor/id/' + id);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -43,4 +43,4 @@ const patientService = {
     },
 };
 
-export default patientService;
+export default doctorService;
