@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useReactToPrint } from "react-to-print";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import patientService from "../../../Services/patientService";
+import PatientReport from "../PatientReport";
 import logo from "../../../assets/logo.png";
 
 const PatientDetails = () => {
   const { id } = useParams();
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
-  const componentRef = useRef();
 
   useEffect(() => {
     const fetchPatientDetails = async () => {
@@ -28,14 +28,6 @@ const PatientDetails = () => {
     };
     fetchPatientDetails();
   }, [id]);
-
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    pageStyle: `
-      @page { size: A4; margin: 20mm; }
-      body { font-family: Arial, sans-serif; padding: 20px; }
-    `,
-  });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -92,47 +84,40 @@ const PatientDetails = () => {
           <div className="mb-6">
             <h3 className="text-lg font-bold">History</h3>
             <p className="mt-2 text-sm">
-              {patient.history || "Patient has a history of chronic migraines and hypertension. Previous treatments included lifestyle changes and prescribed medications."}
+              {patient.history || "Patient has a history of chronic migraines and hypertension."}
             </p>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-bold">Diagnose</h3>
             <p className="mt-2 text-sm">
-              {patient.diagnosis || "Recent tests indicate signs of mild anemia and elevated blood pressure levels. Further diagnostic imaging recommended."}
+              {patient.diagnosis || "Recent tests indicate signs of mild anemia and elevated blood pressure levels."}
             </p>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-bold">Recommendation</h3>
             <p className="mt-2 text-sm">
-              {patient.recommendation || (
-                <>
-                  - Begin a low-sodium diet.<br />
-                  - Continue current blood pressure medication.<br />
-                  - Schedule follow-up in two weeks.<br />
-                  - Consider iron supplements as advised.
-                </>
-              )}
+              {patient.recommendation || "- Begin a low-sodium diet.\n- Continue current blood pressure medication.\n- Schedule follow-up in two weeks.\n- Consider iron supplements as advised."}
             </p>
           </div>
         </div>
-
         <div className="w-4/5 pl-4">
           <div className="mb-6">
             <h3 className="text-lg font-bold">Treatment Recommendation</h3>
             <p className="mt-2 text-sm">
-              {patient.treatment_recommendation || (
-                <>
-                  - Begin a low-sodium diet.<br />
-                  - Continue current blood pressure medication.<br />
-                  - Schedule follow-up in two weeks.<br />
-                  - Consider iron supplements as advised.
-                </>
-              )}
+              {patient.treatment_recommendation || "- Begin a low-sodium diet.\n- Continue current blood pressure medication.\n- Schedule follow-up in two weeks.\n- Consider iron supplements as advised."}
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <PDFDownloadLink
+          document={<PatientReport patient={patient} />}
+          fileName={`patient_${id}.pdf`}
+          className="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600"
+        >
+          {({ loading }) => (loading ? "Generating PDF..." : "Download PDF")}
+        </PDFDownloadLink>
       </div>
     </div>
   );
