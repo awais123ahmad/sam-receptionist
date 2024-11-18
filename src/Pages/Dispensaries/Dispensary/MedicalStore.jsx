@@ -182,6 +182,11 @@ const MedicalStore = () => {
               + Add Medicine
             </button>
           </Link>
+          <Link to='SaleMedicine'>
+            <button className="bg-[#a6a6a6] h-[2rem] px-4 rounded-md text-black font-[600] text-[14px]">
+              + Sale Medicine
+            </button>
+          </Link>
           <div className="w-[40%]">
             <input
               type="search"

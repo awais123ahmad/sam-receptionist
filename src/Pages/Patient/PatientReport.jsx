@@ -79,30 +79,63 @@ const styles = StyleSheet.create({
   doctorDetails: {
     fontSize: 12, // Default font size for other details
   },
+  divider: {
+    height: 1, // Thickness of the line
+    backgroundColor: '#ccc', // Line color
+    marginVertical: 10, // Spacing around the line
+  },
+  marginBottomtemp:{
+    marginBottom: 10
+  },
 });
 
 const PatientReport = ({ patient }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
-        <View style={{ flexDirection: "row", alignItems: "center", flex: 1, justifyContent: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
           <Image style={styles.logo} src={logo} />
         </View>
-        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", flex: 2 }}>
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 2,
+          }}
+        >
           <Text style={styles.title}>Said Ahmed Memorial Hospital</Text>
           <Text style={styles.address}>XYZ GT Road, Lahore</Text>
         </View>
-        <View style={{ flexDirection: "column", justifyContent: "left", alignItems: "left", flex: 1 }}>
-        <Text style={styles.doctorDetails}>11/16/2024</Text>
-        <Text style={styles.doctorName}>Dr. Mukesh</Text>
-          <Text style={styles.doctorQualification}>MBBS, FCPS (Obstetrician & Gynecology)</Text>
-          
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "left",
+            alignItems: "left",
+            flex: 1,
+          }}
+        >
+          <Text style={styles.doctorDetails}>11/16/2024</Text>
+          <Text style={styles.doctorName}>Dr. Mukesh</Text>
+          <Text style={styles.doctorQualification}>
+            MBBS, FCPS (Obstetrician & Gynecology)
+          </Text>
+
           <Text style={styles.doctorDetails}>Fee: $200</Text>
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Patient: {patient.full_name || "John Doe"}</Text>
+        <Text style={styles.sectionTitle}>
+          Patient: {patient.full_name || "John Doe"}
+        </Text>
       </View>
 
       <View style={styles.table}>
@@ -120,15 +153,21 @@ const PatientReport = ({ patient }) => (
             {patient.address || "123 Main St, Cityville"}
           </Text>
         </View>
-        <View style={styles.tableRowLast}>
+        {/* <View style={styles.tableRowLast}>
           <Text style={styles.tableCell}>Phone</Text>
           <Text style={styles.tableCell}>{patient.phone || "(555) 123-4567"}</Text>
           <Text style={styles.tableCell}>Email</Text>
           <Text style={styles.tableCellLast}>
             {patient.email || "john.doe@email.com"}
           </Text>
-        </View>
+        </View> */}
       </View>
+
+      <View style={styles.section}>
+      <Text style={[styles.doctorName, styles.marginBottomtemp]}>Temp:</Text>
+        <Text style={styles.doctorName}>B/P:</Text>
+      </View>
+      <View style={styles.divider} />
 
       <View style={styles.contentRow}>
         <View style={styles.leftColumn}>
