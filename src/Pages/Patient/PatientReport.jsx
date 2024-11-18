@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   logo: { width: 40, height: 40 },
   title: { fontSize: 16, fontWeight: "bold" },
   section: { marginBottom: 10 },
-  sectionTitle: { fontSize: 14, fontWeight: "bold", marginBottom: 5 },
+  sectionTitle: { fontSize: 14, fontWeight: "bold", marginBottom: 2 },
   text: { lineHeight: 1.5 },
   table: {
     marginVertical: 10,
@@ -70,19 +70,34 @@ const styles = StyleSheet.create({
     width: "70%",
     paddingLeft: 10,
   },
+  doctorName: {
+    fontWeight: "bold", // Make the name bold
+  },
+  doctorQualification: {
+    fontSize: 10, // Make the qualification smaller
+  },
+  doctorDetails: {
+    fontSize: 12, // Default font size for other details
+  },
 });
 
 const PatientReport = ({ patient }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", flex: 1, justifyContent: "center" }}>
           <Image style={styles.logo} src={logo} />
-          <Text style={styles.title}>MIT Medical Health Screening</Text>
         </View>
-        <View>
-          <Text>11/16/2024</Text>
-          <Text>Fee: $200</Text>
+        <View style={{ flexDirection: "column", justifyContent: "center", alignItems: "center", flex: 2 }}>
+          <Text style={styles.title}>Said Ahmed Memorial Hospital</Text>
+          <Text style={styles.address}>XYZ GT Road, Lahore</Text>
+        </View>
+        <View style={{ flexDirection: "column", justifyContent: "left", alignItems: "left", flex: 1 }}>
+        <Text style={styles.doctorDetails}>11/16/2024</Text>
+        <Text style={styles.doctorName}>Dr. Mukesh</Text>
+          <Text style={styles.doctorQualification}>MBBS, FCPS (Obstetrician & Gynecology)</Text>
+          
+          <Text style={styles.doctorDetails}>Fee: $200</Text>
         </View>
       </View>
 

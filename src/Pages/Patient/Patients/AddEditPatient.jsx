@@ -13,7 +13,8 @@ const AddEditPatient = () => {
     date_of_birth: "",
     address: "",
     checkup_date: "",
-    assigned_doctor: "", // This should hold the selected doctor's ID
+    assigned_doctor: "", 
+    CNIC: "",
   });
 
   const [doctorData, setDoctorData] = useState([]); 
@@ -139,7 +140,21 @@ const AddEditPatient = () => {
           </div>
         </div>
 
-        <div>
+        <div className="mt-[20px] flex">
+          <div style={{ width: "50%" }}>
+            <TextField
+              label="CNIC"
+              variant="outlined"
+              fullWidth
+              name="CNIC"
+              value={patientData.CNIC}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="mt-[20px]">
           <TextField
             label="Residential Address"
             variant="outlined"

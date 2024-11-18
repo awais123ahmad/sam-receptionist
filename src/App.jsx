@@ -9,6 +9,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Login from "./Pages/Login";
 import MedicalStore from "./Pages/Dispensaries/Dispensary/MedicalStore";
 import PatientDetails from "./Pages/Patient/Patients/PatientDetails";
+import AddEditMedicalStore from "./Pages/Dispensaries/Dispensary/AddEditMedicalStore";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -28,7 +29,7 @@ function App() {
 
            {/* // Medical Records ======================================================== */}
            <Route path="/dispensaries/dispensary" element={<MedicalStore />} />
-           <Route path="/dispensaries/dispensary/AddEdit" element={<AddEditPatient />} />
+           <Route path="/dispensaries/dispensary/AddEditMedical" element={<AddEditMedicalStore />} />
 
 
 

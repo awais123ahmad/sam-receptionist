@@ -39,45 +39,52 @@ const PatientDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-4 bg-gray-100">
-      <div className="flex justify-between items-center border-b-2 pb-4 mb-6">
+      <div className="flex justify-between items-center border-b-2 pb-4 mb-3">
         <div className="flex items-center space-x-4">
           <img src={logo} alt="Logo" className="w-12 h-12" />
-          <h1 className="text-2xl font-bold">MIT Medical Health Screening</h1>
+        </div>
+        <div className="flex flex-col items-center space-x-4">
+          <h1 className="text-2xl font-bold">Said Ahmed Memorial Hospital</h1>
+          <p className="text-sm">XYZ GT Road, Lahore</p>
         </div>
         <div className="text-right">
-          <p className="text-sm">11/16/2024</p>
-          <p className="text-lg font-semibold">Fee: $200</p>
+        <p className="text-sm">11/16/2024</p>
+        <p className="text-sm">Dr. Mukesh</p>
+        <p className="text-sm">MBBS, FCPS (Obstetrician &Gynecology) </p>
+    
+        <p className="text-lg font-semibold">Fee: $200</p>
         </div>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-2">
         <h2 className="text-xl font-semibold">Patient: {patient.full_name || "John Doe"}</h2>
       </div>
 
-      <div className="mb-6">
-        <table className="table-auto w-full border-collapse border border-gray-200">
-          <tbody>
-            <tr>
-              <td className="border border-gray-300 p-2 w-1/2">Age</td>
-              <td className="border border-gray-300 p-2 w-1/2">{patient.age || "35"}</td>
-              <td className="border border-gray-300 p-2 w-1/2">Gender</td>
-              <td className="border border-gray-300 p-2 w-1/2">{patient.gender || "Male"}</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-300 p-2">Blood Type</td>
-              <td className="border border-gray-300 p-2">{patient.blood_type || "O+"}</td>
-              <td className="border border-gray-300 p-2">Address</td>
-              <td className="border border-gray-300 p-2">{patient.address || "123 Main St, Cambridge, MA"}</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-300 p-2">Phone</td>
-              <td className="border border-gray-300 p-2">{patient.phone || "(555) 123-4567"}</td>
-              <td className="border border-gray-300 p-2">Email</td>
-              <td className="border border-gray-300 p-2">{patient.email || "john.doe@email.com"}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div className="mb-2">
+  <table className="table-auto w-full border-collapse border border-gray-200 items-center box-border">
+    <tbody>
+      <tr>
+        <td className="border border-gray-300 p-2 ">Age</td>
+        <td className="border border-gray-300 p-2 ">{patient.age || "35"}</td>
+        <td className="border border-gray-300 p-2 ">Gender</td>
+        <td className="border border-gray-300 p-2 ">{patient.gender || "Male"}</td>
+      </tr>
+      <tr>
+        <td className="border border-gray-300 p-2">Blood Type</td>
+        <td className="border border-gray-300 p-2">{patient.blood_type || "O+"}</td>
+        <td className="border border-gray-300 p-2">Address</td>
+        <td className="border border-gray-300 p-2">{patient.address || "123 Main St, Cambridge, MA"}</td>
+      </tr>
+      <tr>
+        <td className="border border-gray-300 p-2">Phone</td>
+        <td className="border border-gray-300 p-2">{patient.phone || "(555) 123-4567"}</td>
+        <td className="border border-gray-300 p-2">Email</td>
+        <td className="border border-gray-300 p-2">{patient.email || "john.doe@email.com"}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
       <div className="flex">
         <div className="w-1/5 border-r-2 pr-4">
