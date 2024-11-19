@@ -1,9 +1,9 @@
 import axiosInstance from "./axiosInstance";
 
-const incomeService = {
+const expenseService = {
     create: async (payload) => {
         try {
-            const response = await axiosInstance.post('/revenues/create', payload);
+            const response = await axiosInstance.post('/expenses/create', payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -11,7 +11,7 @@ const incomeService = {
     },
     fetchAll: async () => {
         try {
-            const response = await axiosInstance.get('/revenues/all');
+            const response = await axiosInstance.get('/expenses/all');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -19,7 +19,7 @@ const incomeService = {
     },
     fetchTotal: async () => {
         try {
-            const response = await axiosInstance.get('/revenues/total');
+            const response = await axiosInstance.get('/expenses/total');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -27,7 +27,7 @@ const incomeService = {
     },
     fetchById: async (id) => {
         try {
-            const response = await axiosInstance.get('/revenues/get/' + id);
+            const response = await axiosInstance.get('/expenses/get/' + id);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -35,7 +35,7 @@ const incomeService = {
     },
     update: async (id, payload) => {
         try {
-            const response = await axiosInstance.put(`/revenues/edit/${id}`, payload);
+            const response = await axiosInstance.put(`/expenses/edit/${id}`, payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -43,4 +43,4 @@ const incomeService = {
     },
 };
 
-export default incomeService;
+export default expenseService;

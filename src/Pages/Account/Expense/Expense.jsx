@@ -4,10 +4,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Link, useNavigate } from "react-router-dom";
 import PaginationComponent from "../../../Components/PaginationComponent";
 import patientService from "../../../Services/patientService";
-import PatientDetails from '../Patients/PatientDetails';
 import toast from 'react-hot-toast';
+import incomeService from "../../../Services/incomeService";
 
-const Patients = () => {
+const Expense = () => {
   const [searchData, setSearchData] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [paginatedData, setPaginatedData] = useState([]);
@@ -20,9 +20,9 @@ const Patients = () => {
     const getPatients = async () => {
       try {
         setLoading(true);
-        const response = await patientService.fetchAllPatients();
+        const response = await incomeService.fetchAll();
         console.log(response);
-        setPatients(response.patients);
+        setPatients(response.revenues);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -35,7 +35,7 @@ const Patients = () => {
   useEffect(() => {
     const filteredResult = patients?.filter(
       (item) =>
-        item?.full_name?.toLowerCase().includes(searchData.toLowerCase())
+        item?.source?.toLowerCase().includes(searchData.toLowerCase())
     ) || [];
     setFilteredData(filteredResult);
     setCurrentPage(1);
@@ -47,24 +47,16 @@ const Patients = () => {
     setPaginatedData(filteredData?.slice(startIndex, endIndex) || []);
   }, [currentPage, filteredData]);
 
-  // Utility function to format date
-const formatDate = (dateString) => {
-  if (!dateString) return ''; // Handle null or undefined
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
-};
-
-
   return (
     <div>
       <div className="p-4">
-        <h1 className="ml-[3%] text-[19px] text-gray-700 font-[700]">Patients Table</h1>
+        <h1 className="ml-[3%] text-[19px] text-gray-700 font-[700]">Income</h1>
         <h1 className="ml-[3%] text-[13px] text-gray-700 mb-4">{filteredData?.length || 0} records found</h1>
         
         <div className="flex mt-8 flex-row-reverse justify-between px-[3%]">
-          <Link to='AddEdit'>
+          <Link to=''>
             <button className="bg-[#232233] h-[2rem] px-4 rounded-md text-white font-[600] text-[14px]">
-              + Enter Patient
+              + 
             </button>
           </Link>
           <div className="w-[40%]">
@@ -83,36 +75,30 @@ const formatDate = (dateString) => {
           <table className="w-[100%]">
             <thead>
               <tr className="text-[#101418] capitalize leading-normal">
-              <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left pl-4">Patient NO.</th>
-              <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Check up Date</th>
-                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Patient Name</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left">Contact Number</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Gender</th>
-                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">Address</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Action</th>
+              <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left">Date</th>
+                <th className="py-[1%] w-[35%] text-[.8rem] text-gray-700 text-left pl-4">Amount</th>
+                
+                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">Description</th>
+                <th className="py-[1%] w-[15%] text-[.8rem] text-gray-700 text-center">Action</th>
+             
               </tr>
             </thead>
             <tbody>
               {paginatedData?.map((patient) => (
                 <tr key={patient?.patient_id} className="bg-white text-gray-600 text-sm font-light border-t-[1px] border-gray-200">
-                  <td className="w-[10%] text-left">
-                    <p className="font-[600] text-gray-600 text-[14px] text-center">{patient?.patient_id}</p>
-                  </td>
+                  
                   <td className="w-[20%] text-left">
-                    <p className="font-[600] text-gray-600 text-[14px] text-left">{formatDate(patient?.checkup_date)}</p>
+                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.revenue_date}</p>
                   </td>
-                  <td className="py-[1%] w-[20%] text-left pl-4">
-                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.full_name}</p>
+                  <td className="py-[1%] w-[35%] text-left pl-4">
+                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.amount}</p>
+                    <p className="font-[400] text-gray-500 text-[13px]">{patient?.source}</p>
                   </td>
-                  <td className="w-[10%] text-left">
-                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.contact_number}</p>
+                  
+                  <td className="py-[2%] px-2 w-[15%] text-center">
+                    <span className="font-[400]">{patient?.description}</span>
                   </td>
-                  <td className="py-[2%] px-2 w-[10%] text-center">
-                    <span className="font-[400]">{patient?.gender}</span>
-                  </td>
-                  <td className="py-[2%] px-2 w-[20%] text-center">
-                    <span className="font-[400]">{patient?.address}</span>
-                  </td>
+                
                   <td className="py-[2%] w-[10%] text-center">
                     <Link to={`/patient/patients/${patient.patient_id}`}>
                       <button className="text-[13px] font-[500] text-blue-500">View</button>
@@ -136,5 +122,5 @@ const formatDate = (dateString) => {
   );
 };
 
-export default Patients;
+export default Expense;
 

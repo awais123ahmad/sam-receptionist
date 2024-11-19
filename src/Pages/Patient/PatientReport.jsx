@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const formatDate = (dateString) => {
+  if (!dateString) return ''; // Handle null or undefined
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
+
 const PatientReport = ({ patient }) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -122,10 +128,10 @@ const PatientReport = ({ patient }) => (
             flex: 1,
           }}
         >
-          <Text style={styles.doctorDetails}>11/16/2024</Text>
-          <Text style={styles.doctorName}>Dr. Mukesh</Text>
+          <Text style={styles.doctorDetails}>{formatDate(patient?.checkup_date)}</Text>
+          <Text style={styles.doctorName}>{patient.doctor_name}</Text>
           <Text style={styles.doctorQualification}>
-            MBBS, FCPS (Obstetrician & Gynecology)
+          {patient.specialization}
           </Text>
 
           <Text style={styles.doctorDetails}>
@@ -147,27 +153,12 @@ const PatientReport = ({ patient }) => (
           <Text style={styles.tableCell}>Gender</Text>
           <Text style={styles.tableCellLast}>{patient.gender || "Male"}</Text>
         </View>
-        {/* <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>Blood Type</Text>
-          <Text style={styles.tableCell}>{patient.blood_type || "O+"}</Text>
-          <Text style={styles.tableCell}>Address</Text>
-          <Text style={styles.tableCellLast}>
-            {patient.address || "123 Main St, Cityville"}
-          </Text>
-        </View> */}
-        {/* <View style={styles.tableRowLast}>
-          <Text style={styles.tableCell}>Phone</Text>
-          <Text style={styles.tableCell}>{patient.phone || "(555) 123-4567"}</Text>
-          <Text style={styles.tableCell}>Email</Text>
-          <Text style={styles.tableCellLast}>
-            {patient.email || "john.doe@email.com"}
-          </Text>
-        </View> */}
       </View>
 
       <View style={styles.section}>
         <Text style={[styles.doctorName, styles.marginBottomtemp]}>Temp:</Text>
-        <Text style={styles.doctorName}>B/P:</Text>
+        <Text style={[styles.doctorName, styles.marginBottomtemp]}>B/P:</Text>
+        <Text style={styles.doctorName}>Pulse Rate:</Text>
       </View>
       <View style={styles.divider} />
 
@@ -197,7 +188,7 @@ const PatientReport = ({ patient }) => (
 
         <View style={styles.rightColumn}>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Treatment Recommendation</Text>
+            {/* <Text style={styles.sectionTitle}>Treatment Recommendation</Text> */}
             <Text style={styles.text}>
               {patient.treatment_recommendation ||
                 ""}

@@ -4,28 +4,15 @@ import patientService from "../../../Services/patientService";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import doctorService from "../../../Services/doctorService";
+import medicineService from "../../../Services/medicineService";
 
 const AddEditMedicalStore = () => {
   const [patientData, setPatientData] = useState({
-    full_name: "",
-    contact_number: "",
-    gender: "",
-    date_of_birth: "",
-    address: "",
-    checkup_date: "",
-    assigned_doctor: "", // This should hold the selected doctor's ID
     medicine_name: "",
     quantity_in_stock: "",
     price_per_unit: "",
     expiry_date: "",
-    supplier: "",
-    batch_number: "",
-    manufacturer: "",
-    storage_conditions: "",
-    purchase_date: "",
-    reorder_level: "",
-    side_effects: "",
-    description: ""
+    supplier: ""
   });
 
   const [doctorData, setDoctorData] = useState([]); 
@@ -70,10 +57,10 @@ const AddEditMedicalStore = () => {
     e.preventDefault();
     try {
       if (id) {
-        await patientService.updatePatient(id, patientData);
-        toast.success("Patient updated successfully!");
+        await medicineService.update(id, patientData);
+        toast.success("Medicine updated successfully!");
       } else {
-        await patientService.create(patientData);
+        await medicineService.create(patientData);
         toast.success("Patient added successfully!");
       }
       navigate("/patients");
