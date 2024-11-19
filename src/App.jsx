@@ -11,6 +11,7 @@ import MedicalStore from "./Pages/Dispensaries/Dispensary/MedicalStore";
 import PatientDetails from "./Pages/Patient/Patients/PatientDetails";
 import AddEditMedicalStore from "./Pages/Dispensaries/Dispensary/AddEditMedicalStore";
 import SaleMedicine from "./Pages/Dispensaries/Dispensary/SaleMedicine";
+import Income from "./Pages/Account/Income/Income";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +33,14 @@ function App() {
            <Route path="/dispensaries/dispensary" element={<MedicalStore />} />
            <Route path="/dispensaries/dispensary/AddEditMedical" element={<AddEditMedicalStore />} />
            <Route path="/dispensaries/dispensary/SaleMedicine" element={<SaleMedicine />} />
+
+           
+           {/* // Account Records ======================================================== */}
+           <Route path="account/income" element={<Income />} />
+           <Route path="account/income/AddEditIncome" element={<AddEditPatient />} />
+
+           <Route path="account/expense" element={< Patients/>} />
+           <Route path="account/income/AddEditIncome" element={<AddEditPatient />} />
 
 
 

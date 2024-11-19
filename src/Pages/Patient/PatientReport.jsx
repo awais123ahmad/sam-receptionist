@@ -81,11 +81,11 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1, // Thickness of the line
-    backgroundColor: '#ccc', // Line color
+    backgroundColor: "#ccc", // Line color
     marginVertical: 10, // Spacing around the line
   },
-  marginBottomtemp:{
-    marginBottom: 10
+  marginBottomtemp: {
+    marginBottom: 10,
   },
 });
 
@@ -128,7 +128,9 @@ const PatientReport = ({ patient }) => (
             MBBS, FCPS (Obstetrician & Gynecology)
           </Text>
 
-          <Text style={styles.doctorDetails}>Fee: $200</Text>
+          <Text style={styles.doctorDetails}>
+            Patient No: {patient.patient_id || "0000"}{" "}
+          </Text>
         </View>
       </View>
 
@@ -145,14 +147,14 @@ const PatientReport = ({ patient }) => (
           <Text style={styles.tableCell}>Gender</Text>
           <Text style={styles.tableCellLast}>{patient.gender || "Male"}</Text>
         </View>
-        <View style={styles.tableRow}>
+        {/* <View style={styles.tableRow}>
           <Text style={styles.tableCell}>Blood Type</Text>
           <Text style={styles.tableCell}>{patient.blood_type || "O+"}</Text>
           <Text style={styles.tableCell}>Address</Text>
           <Text style={styles.tableCellLast}>
             {patient.address || "123 Main St, Cityville"}
           </Text>
-        </View>
+        </View> */}
         {/* <View style={styles.tableRowLast}>
           <Text style={styles.tableCell}>Phone</Text>
           <Text style={styles.tableCell}>{patient.phone || "(555) 123-4567"}</Text>
@@ -164,7 +166,7 @@ const PatientReport = ({ patient }) => (
       </View>
 
       <View style={styles.section}>
-      <Text style={[styles.doctorName, styles.marginBottomtemp]}>Temp:</Text>
+        <Text style={[styles.doctorName, styles.marginBottomtemp]}>Temp:</Text>
         <Text style={styles.doctorName}>B/P:</Text>
       </View>
       <View style={styles.divider} />
@@ -174,24 +176,21 @@ const PatientReport = ({ patient }) => (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>History</Text>
             <Text style={styles.text}>
-              {patient.history ||
-                "Patient has a history of chronic migraines and hypertension. Previous treatments included lifestyle changes and prescribed medications."}
+              {patient.history || "\n\n\n\n\n\n\n\n"}
             </Text>
           </View>
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Diagnose</Text>
             <Text style={styles.text}>
-              {patient.diagnosis ||
-                "Recent tests indicate signs of mild anemia and elevated blood pressure levels. Further diagnostic imaging recommended."}
+              {patient.diagnosis || "\n\n\n\n\n\n\n\n"}
             </Text>
           </View>
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Recommendation</Text>
             <Text style={styles.text}>
-              {patient.recommendation ||
-                "- Begin a low-sodium diet.\n- Continue current blood pressure medication.\n- Schedule follow-up in two weeks.\n- Consider iron supplements as advised."}
+              {patient.diagnosis || "\n\n\n\n\n\n\n\n"}
             </Text>
           </View>
         </View>
@@ -201,7 +200,7 @@ const PatientReport = ({ patient }) => (
             <Text style={styles.sectionTitle}>Treatment Recommendation</Text>
             <Text style={styles.text}>
               {patient.treatment_recommendation ||
-                "- Begin a low-sodium diet.\n- Continue current blood pressure medication.\n- Schedule follow-up in two weeks.\n- Consider iron supplements as advised."}
+                ""}
             </Text>
           </View>
         </View>
