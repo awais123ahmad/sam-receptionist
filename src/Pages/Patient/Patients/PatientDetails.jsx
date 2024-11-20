@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer"; // Import `pdf` for generating PDFs
 import patientService from "../../../Services/patientService";
 import PatientReport from "../PatientReport";
 import logo from "../../../assets/logo.png";
@@ -29,6 +29,20 @@ const PatientDetails = () => {
     fetchPatientDetails();
   }, [id]);
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
+
+  const handlePrint = async () => {
+    const doc = <PatientReport patient={patient} />;
+    const blob = await pdf(doc).toBlob();
+    const url = URL.createObjectURL(blob);
+    const newWindow = window.open(url, "_blank");
+    if (newWindow) newWindow.print(); // Automatically open the print dialog
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -36,13 +50,6 @@ const PatientDetails = () => {
   if (!patient) {
     return <div>Patient data not available.</div>;
   }
-
-  const formatDate = (dateString) => {
-    if (!dateString) return ''; // Handle null or undefined
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  };
-  
 
   return (
     <div className="max-w-5xl mx-auto p-4 bg-gray-100">
@@ -150,13 +157,12 @@ const PatientDetails = () => {
       </div>
 
       <div className="mt-10 flex justify-center">
-        <PDFDownloadLink
-          document={<PatientReport patient={patient} />}
-          fileName={`patient_${id}.pdf`}
+      <button
+          onClick={handlePrint}
           className="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600"
         >
-          {({ loading }) => (loading ? "Generating PDF..." : "Download PDF")}
-        </PDFDownloadLink>
+          Print PDF
+        </button>
       </div>
     </div>
   );
