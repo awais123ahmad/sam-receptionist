@@ -35,7 +35,8 @@ const Patients = () => {
   useEffect(() => {
     const filteredResult = patients?.filter(
       (item) =>
-        item?.full_name?.toLowerCase().includes(searchData.toLowerCase())
+        item?.contact_number?.toLowerCase().includes(searchData.toLowerCase()) ||
+      item?.CNIC?.toLowerCase().includes(searchData.toLowerCase())
     ) || [];
     setFilteredData(filteredResult);
     setCurrentPage(1);
@@ -70,7 +71,7 @@ const formatDate = (dateString) => {
           <div className="w-[40%]">
             <input
               type="search"
-              placeholder="Search Here..."
+              placeholder="Search By Phone or CNIC..."
               value={searchData}
               onChange={(e) => setSearchData(e.target.value)}
               className="block w-[90%] pl-10 text-gray-900 p-2 rounded-md border-gray-800 bg-white focus:outline-none"
@@ -87,7 +88,7 @@ const formatDate = (dateString) => {
               <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Check up Date</th>
                 <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Patient Name</th>
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left">Contact Number</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Gender</th>
+                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">CNIC</th>
                 <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">Address</th>
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Action</th>
               </tr>
@@ -108,7 +109,7 @@ const formatDate = (dateString) => {
                     <p className="font-[600] text-gray-600 text-[14px]">{patient?.contact_number}</p>
                   </td>
                   <td className="py-[2%] px-2 w-[10%] text-center">
-                    <span className="font-[400]">{patient?.gender}</span>
+                    <span className="font-[400]">{patient?.CNIC}</span>
                   </td>
                   <td className="py-[2%] px-2 w-[20%] text-center">
                     <span className="font-[400]">{patient?.address}</span>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Tooltip } from "@mui/material";
+import { Tooltip, Modal, Box, Typography, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PaginationComponent from "../../../Components/PaginationComponent";
 import patientService from "../../../Services/patientService";
 import toast from 'react-hot-toast';
 import doctorService from "../../../Services/doctorService";
+import DoctorDetailsModal from "./DoctorDetailsModal";
+
 
 const Doctors = () => {
   const [searchData, setSearchData] = useState("");
@@ -15,6 +17,8 @@ const Doctors = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const getDoctors = async () => {
@@ -26,7 +30,7 @@ const Doctors = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        toast.error('Error fetching Patients');
+        toast.error('Error fetching doctors');
       }
     };
     getDoctors();
@@ -47,13 +51,15 @@ const Doctors = () => {
     setPaginatedData(filteredData?.slice(startIndex, endIndex) || []);
   }, [currentPage, filteredData]);
 
-  // Utility function to format date
-const formatDate = (dateString) => {
-  if (!dateString) return ''; // Handle null or undefined
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
-};
+  const handleViewClick = (doctor) => {
+    setSelectedDoctor(doctor);
+    setIsModalOpen(true);
+  };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedDoctor(null);
+  };
 
   return (
     <div>
@@ -113,10 +119,18 @@ const formatDate = (dateString) => {
                   <td className="py-[2%] px-2 w-[20%] text-center">
                     <span className="font-[400]">{patient?.qualification}</span>
                   </td>
-                  <td className="py-[2%] w-[10%] text-center">
+                  {/* <td className="py-[2%] w-[10%] text-center">
                     <Link to={`/patient/patients/${patient.id}`}>
                       <button className="text-[13px] font-[500] text-blue-500">View</button>
                     </Link>
+                  </td> */}
+                   <td className="py-[2%] w-[10%] text-center">
+                    <button
+                      onClick={() => handleViewClick(patient)}
+                      className="text-[13px] font-[500] text-blue-500"
+                    >
+                      View
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -132,9 +146,17 @@ const formatDate = (dateString) => {
           setCurrentPage={setCurrentPage}
         />
       </div>
+
+      <DoctorDetailsModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        doctorDetails={selectedDoctor}
+      />
     </div>
   );
 };
 
 export default Doctors;
+
+
 

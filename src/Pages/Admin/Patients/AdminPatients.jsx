@@ -88,7 +88,7 @@ const formatDate = (dateString) => {
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left">Contact Number</th>
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Gender</th>
                 <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">Address</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Action</th>
+                {/* <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Action</th> */}
               </tr>
             </thead>
             <tbody>
@@ -112,11 +112,11 @@ const formatDate = (dateString) => {
                   <td className="py-[2%] px-2 w-[20%] text-center">
                     <span className="font-[400]">{patient?.address}</span>
                   </td>
-                  <td className="py-[2%] w-[10%] text-center">
+                  {/* <td className="py-[2%] w-[10%] text-center">
                     <Link to={`/patient/patients/${patient.patient_id}`}>
                       <button className="text-[13px] font-[500] text-blue-500">View</button>
                     </Link>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
