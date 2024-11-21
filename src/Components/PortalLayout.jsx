@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../assets/logo.png";
 
-import { FaUserInjured } from 'react-icons/fa';
+import { FaFirstAid, FaUserInjured } from 'react-icons/fa';
 
 import { Popover, Transition } from "@headlessui/react";
 
@@ -42,6 +42,7 @@ import {
 } from "../Utills/Constants";
 //import { useDispatch } from "react-redux";
 import { logout } from "../Api/Reducers/authReducer";
+import { MedicalInformation, PeopleAltRounded } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -430,8 +431,6 @@ export default function PortalLayout({ children }) {
                   
                 </ul>
 
-                
-
                 <div
                   onClick={() => handleSelection(3)}
                   className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem]`}
@@ -446,8 +445,9 @@ export default function PortalLayout({ children }) {
                       !open ? "hidden" : "block"
                     }`}
                   >
-                    Account
+                    Admin
                   </span>
+
                   <IoIosArrowDown
                     className={`w-4 h-4 ${
                       open1[3]
@@ -456,7 +456,142 @@ export default function PortalLayout({ children }) {
                     }   ${!open ? "hidden" : "block"}  `}
                   />
                 </div>
+                
                 <ul className={`${open1[3] ? "" : "hidden"} w-[100%]`}>
+
+                  <li>
+                    <div
+                      onClick={() => route("/admin/doctor")}
+                      className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
+                        location.pathname === "/admin/doctor" ||
+                        location.pathname === "/admin/doctor/add"
+                          ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
+                          : " mr-2 rounded-md"
+                      }  ${open ? "ml-6" : "ml-0"}  `}
+                    >
+                      <FaFirstAid
+                        className={`!text-5xl ${
+                          open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
+                        } rounded-full p-[12px] ml-[-1.2rem] ${
+                          location.pathname === "/admin/doctor"
+                            ? "bg-white text-gray-600"
+                            : ""
+                        } `}
+                        sx={{
+                          boxShadow:
+                            location.pathname === "/admin/doctor"
+                              ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
+                              : "",
+                        }}
+                      />
+                      <span
+                        className={`flex-1 font-[600]  text-left ml-[2px] text-[13px] ${
+                          !open ? "hidden" : "block"
+                        }`}
+                      >
+                        Doctors
+                      </span>
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      onClick={() => route("/admin/patients")}
+                      className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
+                        location.pathname === "/admin/patients" ||
+                        location.pathname === "/admin/patients/add"
+                          ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
+                          : " mr-2 rounded-md"
+                      }  ${open ? "ml-6" : "ml-0"}  `}
+                    >
+                      <FaUserInjured
+                        className={`!text-5xl ${
+                          open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
+                        } rounded-full p-[12px] ml-[-1.2rem] ${
+                          location.pathname === "/admin/patients"
+                            ? "bg-white text-gray-600"
+                            : ""
+                        } `}
+                        sx={{
+                          boxShadow:
+                            location.pathname === "/admin/patients"
+                              ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
+                              : "",
+                        }}
+                      />
+                      <span
+                        className={`flex-1 font-[600]  text-left ml-[2px] text-[13px] ${
+                          !open ? "hidden" : "block"
+                        }`}
+                      >
+                         Patients
+                      </span>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div
+                      onClick={() => route("/admin/medicines")}
+                      className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
+                        location.pathname === "/admin/medicines" ||
+                        location.pathname === "/admin/medicines/add"
+                          ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
+                          : " mr-2 rounded-md"
+                      }  ${open ? "ml-6" : "ml-0"}  `}
+                    >
+                      <MedicalInformation
+                        className={`!text-5xl ${
+                          open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
+                        } rounded-full p-[12px] ml-[-1.2rem] ${
+                          location.pathname === "/admin/medicines"
+                            ? "bg-white text-gray-600"
+                            : ""
+                        } `}
+                        sx={{
+                          boxShadow:
+                            location.pathname === "/admin/medicines"
+                              ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
+                              : "",
+                        }}
+                      />
+                      <span
+                        className={`flex-1 font-[600]  text-left ml-[2px] text-[13px] ${
+                          !open ? "hidden" : "block"
+                        }`}
+                      >
+                        Medicines
+                      </span>
+                    </div>
+                  </li>
+                  
+                </ul> 
+              
+                <div
+                  onClick={() => handleSelection(4)}
+                  className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem]`}
+                >
+                  <AccountCircleIcon
+                    className={`!text-5xl ${
+                      open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
+                    } rounded-full p-[12px] ml-[-1.2rem]`}
+                  />
+                  <span
+                    className={`flex-1 font-[600] text-left ml-[2px] text-[14px] ${
+                      !open ? "hidden" : "block"
+                    }`}
+                  >
+                    Account
+                  </span>
+
+                  <IoIosArrowDown
+                    className={`w-4 h-4 ${
+                      open1[4]
+                        ? "-rotate-180 duration-300"
+                        : "rotate-0 duration-300"
+                    }   ${!open ? "hidden" : "block"}  `}
+                  />
+                </div>
+
+                <ul className={`${open1[4] ? "" : "hidden"} w-[100%]`}>
 
                   <li>
                     <div

@@ -33,9 +33,9 @@ const doctorService = {
             throw error.response.data;
         }
     },
-    updatePatient: async (id, payload) => {
+    update: async (id, payload) => {
         try {
-            const response = await axiosInstance.put(`/patients/edit/${id}`, payload);
+            const response = await axiosInstance.put(`/doctor/edit/${id}`, payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
