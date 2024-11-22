@@ -41,6 +41,10 @@ function App() {
            <Route path="/dispensaries/dispensary/SaleMedicine" element={<SaleMedicine />} />
 
             {/* // Admin Records ======================================================== */}
+
+            <Route path="admin/doctor" element={<Doctors />} />
+           <Route path="admin/doctor/AddEditDoctor" element={<AddEditDoctors />} />
+           
             <Route path="admin/doctor" element={<Doctors />} />
            <Route path="admin/doctor/AddEditDoctor" element={<AddEditDoctors />} />
 
