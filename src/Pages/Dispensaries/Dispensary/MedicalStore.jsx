@@ -128,6 +128,7 @@ import { Link } from "react-router-dom";
 import PaginationComponent from "../../../Components/PaginationComponent";
 import toast from 'react-hot-toast';
 import recordService from "../../../Services/recordService";
+import medicineService from "../../../Services/medicineService";
 
 const MedicalStore = () => {
   const [searchData, setSearchData] = useState("");
@@ -139,26 +140,26 @@ const MedicalStore = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getMedicalRecords = async () => {
+    const getMedicines = async () => {
       try {
         setLoading(true);
-        const response = await recordService.fetchAll();
+        const response = await medicineService.fetchAll();
         console.log(response); // Log the response to confirm the structure
-        setRecords(response.medicalRecords); // Access the patients array within response
+        setRecords(response.medicines); // Access the patients array within response
         setLoading(false);
       } catch (error) {
         setLoading(false);
         toast.error('Error fetching Patients');
       }
     };
-    getMedicalRecords();
+    getMedicines();
   }, []);
   
 
   useEffect(() => {
     const filteredResult = records?.filter(
       (item) =>
-        item?.treatment?.toLowerCase().includes(searchData.toLowerCase())
+        item?.medicine_name?.toLowerCase().includes(searchData.toLowerCase())
     ) || [];
     setFilteredData(filteredResult);
     setCurrentPage(1);
@@ -173,15 +174,15 @@ const MedicalStore = () => {
   return (
     <div>
       <div className="p-4">
-        <h1 className="ml-[3%] text-[19px] text-gray-700 font-[700]">Medical Records Table</h1>
+        <h1 className="ml-[3%] text-[19px] text-gray-700 font-[700]">Medicine Table</h1>
         <h1 className="ml-[3%] text-[13px] text-gray-700 mb-4">{filteredData?.length || 0} records found</h1>
         
         <div className="flex mt-8 flex-row-reverse justify-between px-[3%]">
-          <Link to='AddEditMedical'>
+          {/* <Link to='AddEditMedical'>
             <button className="bg-[#232233] h-[2rem] px-4 rounded-md text-white font-[600] text-[14px]">
               + Add Medicine
             </button>
-          </Link>
+          </Link> */}
           <Link to='SaleMedicine'>
             <button className="bg-[#a6a6a6] h-[2rem] px-4 rounded-md text-black font-[600] text-[14px]">
               + Sale Medicine
@@ -203,10 +204,12 @@ const MedicalStore = () => {
           <table className="w-[100%]">
             <thead>
               <tr className="text-[#101418] capitalize leading-normal">
-              <th className="py-[1%] w-[15%] text-[.8rem] text-gray-700 text-left pl-4">Patient Id</th>
-                <th className="py-[1%] w-[25%] text-[.8rem] text-gray-700 text-left pl-4">Record Date</th>
-                <th className="py-[1%] w-[25%] text-[.8rem] text-gray-700 text-left">Treatment</th>
-                <th className="py-[1%] w-[25%] text-[.8rem] text-gray-700 text-left">Prescribed Medications</th>
+              <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left pl-4">Medicine Id</th>
+                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Medicine Name</th>
+                <th className="py-[1%] w-[15%] text-[.8rem] text-gray-700 text-left">Qty</th>
+                <th className="py-[1%] w-[15%] text-[.8rem] text-gray-700 text-left">Price</th>
+                <th className="py-[1%] w-[15%] text-[.8rem] text-gray-700 text-left">Expiry Date</th>
+                <th className="py-[1%] w-[15%] text-[.8rem] text-gray-700 text-left">Supplier Name</th>
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left">Action</th>
             
               </tr>
@@ -214,17 +217,23 @@ const MedicalStore = () => {
             <tbody>
               {paginatedData?.map((patient) => (
                 <tr key={patient?.patient_id} className="bg-white text-gray-600 text-sm font-light border-t-[1px] border-gray-200">
-                  <td className="py-[1%] w-[15%] text-left pl-4">
-                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.patient_id}</p>
+                  <td className="py-[1%] w-[10%] text-left pl-4">
+                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.id}</p>
                   </td>
-                  <td className="w-[25%] text-left">
-                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.record_date}</p>
+                  <td className="w-[20%] text-left">
+                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.medicine_name}</p>
                   </td>
-                  <td className="py-[2%] px-2 w-[25%] text-left">
-                    <span className="font-[400]">{patient?.treatment}</span>
+                  <td className="py-[2%] px-2 w-[15%] text-left">
+                    <span className="font-[400]">{patient?.quantity_in_stock}</span>
                   </td>
-                  <td className="py-[2%] px-2 w-[25%] text-left">
-                    <span className="font-[400]">{patient?.prescribed_medications}</span>
+                  <td className="py-[2%] px-2 w-[15%] text-left">
+                    <span className="font-[400]">{patient?.price}</span>
+                  </td>
+                  <td className="py-[2%] px-2 w-[15%] text-left">
+                    <span className="font-[400]">{patient?.expiry_date}</span>
+                  </td>
+                  <td className="py-[2%] px-2 w-[15%] text-left">
+                    <span className="font-[400]">{patient?.supplier_name}</span>
                   </td>
                   <td className="py-[2%] w-[10%] text-left">
                     <p className="text-[13px] font-[500] text-gray-600">Edit</p>

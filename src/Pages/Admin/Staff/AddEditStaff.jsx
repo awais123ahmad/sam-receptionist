@@ -13,17 +13,20 @@ import patientService from "../../../Services/patientService";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import doctorService from "../../../Services/doctorService";
+import staffService from "../../../Services/staffService";
 
 const AddEditStaff = () => {
   const [patientData, setPatientData] = useState({
-    name: "",
-    specialization: "",
-    phone_no: "",
-    cnic: "",
+    full_name: "",
+    role: "",
+    date_of_birth: "",
+    gender: "",
+    contact_number: "",
     email: "",
+    address: "",
     qualification: "",
-    pay: "",
-    experience: "",
+    hire_date: "",
+    salary: "",
   });
 
   const [doctorData, setDoctorData] = useState([]);
@@ -69,10 +72,10 @@ const AddEditStaff = () => {
     e.preventDefault();
     try {
       if (id) {
-        await doctorService.update(id, patientData);
+        await staffService.update(id, patientData);
         toast.success("Doctor updated successfully!");
       } else {
-        await doctorService.create(patientData);
+        await staffService.create(patientData);
         toast.success("Doctor added successfully!");
       }
       navigate("/patients");
@@ -84,29 +87,29 @@ const AddEditStaff = () => {
   return (
     <form onSubmit={handleSubmit} className="w-[90%] m-auto">
       <h1 className="m-[30px] text-center font-[700] text-[20px]">
-        {id ? "Edit Doctor" : "Add Doctor"}
+        {id ? "Edit Staff" : "Add Staff"}
       </h1>
       <Divider />
       <div>
         <div className="mt-[20px] flex">
           <div style={{ width: "50%" }}>
             <TextField
-              label="Doctor Name"
+              label="Full Name"
               variant="outlined"
               fullWidth
-              name="name"
-              value={patientData.name}
+              name="full_name"
+              value={patientData.full_name}
               onChange={handleChange}
               required
             />
           </div>
           <div style={{ marginLeft: 20, width: "50%" }}>
             <TextField
-              label="Specialization"
+              label="Role"
               variant="outlined"
               fullWidth
-              name="specialization"
-              value={patientData.specialization}
+              name="role"
+              value={patientData.role}
               onChange={handleChange}
               required
             />
@@ -114,33 +117,54 @@ const AddEditStaff = () => {
         </div>
 
         <div className="mt-[20px] flex">
-          <div style={{ width: "50%" }}>
+          <div style={{width: "50%" }}>
             <TextField
-              label="Phone No."
+              label="Date of Birth"
               variant="outlined"
               fullWidth
-              name="phone_no"
-              value={patientData.phone_no}
+              type="date"
+              name="date_of_birth"
+              value={patientData.date_of_birth}
+              onChange={handleChange}
+              required
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
+
+          <div style={{ marginLeft: 20, width: "50%" }}>
+            <FormControl fullWidth>
+              <InputLabel>Gender</InputLabel>
+              <Select
+                label="Gender"
+                name="gender"
+                value={patientData.gender}
+                onChange={handleChange}
+                required
+              >
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        <div className="mt-[20px] flex">
+          <div style={{ width: "50%" }}>
+            <TextField
+              label="Phone Number"
+              variant="outlined"
+              fullWidth
+              name="contact_number"
+              value={patientData.contact_number}
               onChange={handleChange}
               required
             />
           </div>
 
           <div style={{ marginLeft: 20, width: "50%" }}>
-            <TextField
-              label="CNIC"
-              variant="outlined"
-              fullWidth
-              name="cnic"
-              value={patientData.cnic}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="mt-[20px] flex">
-          <div style={{ width: "50%" }}>
             <TextField
               label="Email"
               variant="outlined"
@@ -151,7 +175,20 @@ const AddEditStaff = () => {
               required
             />
           </div>
+        </div>
 
+        <div className="mt-[20px] flex">
+          <div style={{ width: "50%" }}>
+            <TextField
+              label="Address"
+              variant="outlined"
+              fullWidth
+              name="address"
+              value={patientData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <div style={{ marginLeft: 20, width: "50%" }}>
             <TextField
               label="Qualification"
@@ -165,55 +202,37 @@ const AddEditStaff = () => {
           </div>
         </div>
 
+
         <div className="mt-[20px] flex">
-        <div style={{  width: "25%" }}>
+        <div style={{width: "50%" }}>
             <TextField
-              label="Pay"
+              label="Date of Appointment"
               variant="outlined"
               fullWidth
-              type="number"
-              name="pay"
-              value={patientData.pay}
+              type="date"
+              name="hire_date"
+              value={patientData.hire_date}
               onChange={handleChange}
               required
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </div>
 
           <div style={{ marginLeft: 20, width: "25%" }}>
             <TextField
-              label="Experience"
+              label="Salary"
               variant="outlined"
               fullWidth
               type="number"
-              name="experience"
-              value={patientData.experience}
+              name="salary"
+              value={patientData.salary}
               onChange={handleChange}
               required
             />
           </div>
-
           </div>
-
-          {/* <div>
-            <FormControl fullWidth>
-              <InputLabel>Assigned Doctor</InputLabel>
-              <Select
-                label="Assigned Doctor"
-                name="assigned_doctor"
-                value={patientData.assigned_doctor} // Set the selected doctor's ID
-                onChange={handleChange}
-                required
-              >
-                {doctorData.map((doctors) => (
-                  <MenuItem key={doctors.id} value={doctors.id}>
-                    {doctors.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div> */}
-
-        
 
         <Grid container style={{ justifyContent: "center", marginTop: "30px" }}>
           <Button

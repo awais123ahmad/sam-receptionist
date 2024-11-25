@@ -89,10 +89,10 @@ const Staff = () => {
               <tr className="text-[#101418] capitalize leading-normal">
               <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left pl-4">Sr No.</th>
               <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Full Name</th>
-                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Role</th>
+                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Job Designation</th>
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left">Qualification</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">CNIC</th>
-                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">hire_date</th>
+                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Address</th>
+                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">Date of Appointment</th>
                 <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Action</th>
               </tr>
             </thead>
@@ -100,28 +100,24 @@ const Staff = () => {
               {paginatedData?.map((patient) => (
                 <tr key={patient?.patient_id} className="bg-white text-gray-600 text-sm font-light border-t-[1px] border-gray-200">
                   <td className="w-[10%] text-left">
-                    <p className="font-[600] text-gray-600 text-[14px] text-center">{patient?.id}</p>
+                    <p className="font-[600] text-gray-600 text-[14px] text-center">{patient?.staff_id}</p>
                   </td>
                   <td className="w-[20%] text-left">
                     <p className="font-[600] text-gray-600 text-[14px] text-left">{patient?.full_name}</p>
                   </td>
                   <td className="py-[1%] w-[20%] text-left pl-4">
-                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.specialization}</p>
+                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.role}</p>
                   </td>
                   <td className="w-[10%] text-left">
-                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.phone_no}</p>
+                    <p className="font-[600] text-gray-600 text-[14px]">{patient?.qualification}</p>
                   </td>
                   <td className="py-[2%] px-2 w-[10%] text-center">
-                    <span className="font-[400]">{patient?.cnic}</span>
+                    <span className="font-[400]">{patient?.address}</span>
                   </td>
                   <td className="py-[2%] px-2 w-[20%] text-center">
-                    <span className="font-[400]">{patient?.qualification}</span>
+                    <span className="font-[400]">{patient?.hire_date}</span>
                   </td>
-                  {/* <td className="py-[2%] w-[10%] text-center">
-                    <Link to={`/patient/patients/${patient.id}`}>
-                      <button className="text-[13px] font-[500] text-blue-500">View</button>
-                    </Link>
-                  </td> */}
+                
                    <td className="py-[2%] w-[10%] text-center">
                     <button
                       onClick={() => handleViewClick(patient)}
