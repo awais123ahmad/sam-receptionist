@@ -1,10 +1,10 @@
 import { Login } from "@mui/icons-material";
 import axiosInstance from "./axiosInstance";
 
-const userService = {
+const staffService = {
     create: async (payload) => {
         try {
-            const response = await axiosInstance.post('/users/create', payload);
+            const response = await axiosInstance.post('/staff/create', payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -12,7 +12,7 @@ const userService = {
     },
     fetchAll: async () => {
         try {
-            const response = await axiosInstance.get('/users/all');
+            const response = await axiosInstance.get('/staff/all');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -20,7 +20,7 @@ const userService = {
     },
     fetchTotal: async () => {
         try {
-            const response = await axiosInstance.get('/users/total');
+            const response = await axiosInstance.get('/staff/total');
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -28,7 +28,7 @@ const userService = {
     },
     fetchById: async (id) => {
         try {
-            const response = await axiosInstance.get('/users/id/' + id);
+            const response = await axiosInstance.get('/staff/id/' + id);
             return response.data;
         } catch (error) {
             throw error.response.data;
@@ -36,21 +36,13 @@ const userService = {
     },
     update: async (id, payload) => {
         try {
-            const response = await axiosInstance.put(`/users/edit/${id}`, payload);
+            const response = await axiosInstance.put(`/staff/edit/${id}`, payload);
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
 
-    login: async (payload) => {
-        try {
-            const response = await axiosInstance.post(`/users/login`, payload);
-            return response.data;
-        } catch (error) {
-            throw error.response.data;
-        }
-    },
 };
 
-export default userService;
+export default staffService;

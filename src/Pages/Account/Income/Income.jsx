@@ -3,7 +3,6 @@ import { Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link, useNavigate } from "react-router-dom";
 import PaginationComponent from "../../../Components/PaginationComponent";
-import patientService from "../../../Services/patientService";
 import toast from 'react-hot-toast';
 import incomeService from "../../../Services/incomeService";
 
@@ -54,7 +53,7 @@ const Income = () => {
         <h1 className="ml-[3%] text-[13px] text-gray-700 mb-4">{filteredData?.length || 0} records found</h1>
         
         <div className="flex mt-8 flex-row-reverse justify-between px-[3%]">
-          <Link to=''>
+          <Link to='/AddEditIncome'>
             <button className="bg-[#232233] h-[2rem] px-4 rounded-md text-white font-[600] text-[14px]">
               + 
             </button>
