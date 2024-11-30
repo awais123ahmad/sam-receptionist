@@ -80,17 +80,17 @@ const formatDate = (dateString) => {
           </div>
         </div>
 
-        <div className="mx-[3%]">
+        <div className="mx-[3%] rounded-lg border-2 bg-gray-700">
           <table className="w-[100%]">
             <thead>
-              <tr className="text-[#101418] capitalize leading-normal">
-              <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left pl-4">Patient NO.</th>
-              <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Check up Date</th>
-                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-left pl-4">Patient Name</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-left">Contact Number</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">CNIC</th>
-                <th className="py-[1%] w-[20%] text-[.8rem] text-gray-700 text-center">Address</th>
-                <th className="py-[1%] w-[10%] text-[.8rem] text-gray-700 text-center">Action</th>
+              <tr className="capitalize leading-normal text-white">
+              <th className="py-[2%] w-[10%] text-[.8rem] text-left pl-4">Patient NO.</th>
+              <th className="py-[2%] w-[20%] text-[.8rem] text-left pl-4">Check up Date</th>
+              <th className="py-[2%] w-[20%] text-[.8rem] text-left pl-4">Patient Name</th>
+              <th className="py-[2%] w-[10%] text-[.8rem] text-left">Contact Number</th>
+              <th className="py-[2%] w-[10%] text-[.8rem] text-center">CNIC</th>
+              <th className="py-[2%] w-[20%] text-[.8rem] text-center">Address</th>
+              <th className="py-[2%] w-[10%] text-[.8rem] text-center">Action</th>
               </tr>
             </thead>
             <tbody>

@@ -15,6 +15,7 @@ const AddEditPatient = () => {
     checkup_date: "",
     assigned_doctor: "", 
     CNIC: "",
+    amount: "",
   });
 
   const [doctorData, setDoctorData] = useState([]); 
@@ -66,7 +67,7 @@ const AddEditPatient = () => {
         await patientService.updatePatient(id, patientData);
         toast.success("Patient updated successfully!");
       } else {
-        await patientService.create(patientData);
+        await patientService.createpr(patientData);
         toast.success("Patient added successfully!");
       }
       navigate("/patients");
@@ -77,7 +78,7 @@ const AddEditPatient = () => {
 
   return (
     <form onSubmit={handleSubmit} className="w-[90%] m-auto">
-      <h1 className="m-[30px] text-center font-[700] text-[20px]">{id ? "Edit Patient" : "Add Patient"}</h1>
+      <h1 className="m-[30px] text-center font-[700] text-[20px]">{id ? "Edit Patient" : "Add Patient"}</h1>  
       <Divider />
       <div>
         <div className="mt-[20px] flex">
@@ -183,6 +184,19 @@ const AddEditPatient = () => {
             />
           </div>
 
+          <div style={{  }}>
+            <TextField
+              label="Amount"
+              variant="outlined"
+              fullWidth
+              type="number"
+              name="amount"
+              value={patientData.amount}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           <div>
             <FormControl fullWidth>
               <InputLabel>Assigned Doctor</InputLabel>
@@ -209,7 +223,7 @@ const AddEditPatient = () => {
             type="submit"
             color="primary"
             size="large"
-            className="!bg-[#007fff] !text-white"
+            className="!bg-gray-700 !text-white"
             style={{ borderRadius: "10px" }}
           >
             Save and Continue

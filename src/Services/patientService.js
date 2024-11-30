@@ -8,7 +8,15 @@ const patientService = {
         } catch (error) {
             throw error.response.data;
         }
-    },
+    },   
+    createpr: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/patients/createpr', payload);
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    }, 
     fetchAllPatients: async () => {
         try {
             const response = await axiosInstance.get('/patients/all');

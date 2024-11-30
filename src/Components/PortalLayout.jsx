@@ -161,11 +161,6 @@ export default function PortalLayout({ children }) {
   //const dispatch = useDispatch();
   console.log("user info", sessionStorage.getItem(SESSION_USERINFO));
 
-  // const handleLogout = () => {
-  //   dispatch(logout())
-  //   route('/login')
-  // }
-
   return (
     <>
       {location.pathname === "/login" ? (
@@ -278,7 +273,7 @@ export default function PortalLayout({ children }) {
 
               <div>
                              
-                <ul className={`${open1[0] ? "" : "hidden"} w-[100%]`}>
+                <ul className={`w-[100%]`}>
                   
                   <li>
                     <div
