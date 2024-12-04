@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <PortalLayout>
         <Routes>
-          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/" element={<LoginPage/>} />
 
           {/* // Patient ================================================================= */}
           <Route path="/patient/patients" element={<Patients />} />
