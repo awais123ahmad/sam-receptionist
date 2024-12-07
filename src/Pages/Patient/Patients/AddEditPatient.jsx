@@ -60,19 +60,35 @@ const AddEditPatient = () => {
     setPatientData({ ...patientData, [name]: value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     if (id) {
+  //       await patientService.updatePatient(id, patientData);
+  //       toast.success("Patient updated successfully!");
+  //     } else {
+  //       await patientService.createpr(patientData);
+  //       toast.success("Patient added successfully!");
+  //     }
+  //     navigate("/reception/patients");
+  //   } catch (error) {
+  //     toast.error("Error saving patient.");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (id) {
         await patientService.updatePatient(id, patientData);
-        toast.success("Patient updated successfully!");
+        toast.success("Patient updated successfully!"); // Success message
       } else {
         await patientService.createpr(patientData);
-        toast.success("Patient added successfully!");
+        toast.success("Patient added successfully!"); // Success message
       }
-      navigate("/patients");
+      navigate("/reception/patients"); // Redirect after submission
     } catch (error) {
-      toast.error("Error saving patient.");
+      toast.error("Error saving patient."); // Error message
     }
   };
 

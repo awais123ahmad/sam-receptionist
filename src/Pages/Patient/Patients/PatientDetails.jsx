@@ -29,6 +29,7 @@ const PatientDetails = () => {
     fetchPatientDetails();
   }, [id]);
 
+
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const options = { year: "numeric", month: "short", day: "numeric" };
@@ -50,6 +51,18 @@ const PatientDetails = () => {
   if (!patient) {
     return <div>Patient data not available.</div>;
   }
+
+  const calculateAge = (dateOfBirth) => {
+    if (!dateOfBirth) return "N/A";
+    const birthDate = new Date(dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
 
   return (
     <div className="max-w-5xl mx-auto p-4 bg-gray-100">
@@ -84,7 +97,7 @@ const PatientDetails = () => {
             <tr>
               <td className="border border-gray-300 p-2 ">Age</td>
               <td className="border border-gray-300 p-2 ">
-                {patient.age || "35"}
+              {patient.age || calculateAge(patient.date_of_birth)}
               </td>
               <td className="border border-gray-300 p-2 ">Gender</td>
               <td className="border border-gray-300 p-2 ">

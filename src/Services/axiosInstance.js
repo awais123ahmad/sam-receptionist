@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    //baseURL: 'https://dbsspareparts.com/api',
+    //baseURL: 'http://119.73.122.118/api',
      baseURL: 'http://localhost:5005/api',
 
     headers: {

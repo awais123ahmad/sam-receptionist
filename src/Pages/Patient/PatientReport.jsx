@@ -89,6 +89,18 @@ const styles = StyleSheet.create({
   },
 });
 
+const calculateAge = (dateOfBirth) => {
+  if (!dateOfBirth) return "N/A";
+  const birthDate = new Date(dateOfBirth);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 const formatDate = (dateString) => {
   if (!dateString) return ''; // Handle null or undefined
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -149,7 +161,7 @@ const PatientReport = ({ patient }) => (
       <View style={styles.table}>
         <View style={styles.tableRow}>
           <Text style={styles.tableCell}>Age</Text>
-          <Text style={styles.tableCell}>{patient.age || "35"}</Text>
+          <Text style={styles.tableCell}> {patient.age || calculateAge(patient.date_of_birth)}</Text>
           <Text style={styles.tableCell}>Gender</Text>
           <Text style={styles.tableCellLast}>{patient.gender || "Male"}</Text>
         </View>

@@ -23,6 +23,7 @@ import {
   SESSION_IS_AUTHENTICATED,
   SESSION_USERINFO,
 } from "../Utills/Constants";
+import { People } from "@mui/icons-material";
 //import { useDispatch } from "react-redux";
 
 const drawerWidth = 240;
@@ -139,6 +140,24 @@ export default function PortalLayout({ children }) {
     }
   }, []);
 
+  const handleLogout = () => {
+    // Clear session storage
+    sessionStorage.removeItem(SESSION_IS_AUTHENTICATED);
+    sessionStorage.removeItem(SESSION_USERINFO);
+
+    // Navigate to the login page
+    navigate("/");
+  };
+
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const email = sessionStorage.getItem("userEmail");
+    if (email) {
+      setUserEmail(email);
+    }
+  }, []);
+
   //const dispatch = useDispatch();
   console.log("user info", sessionStorage.getItem(SESSION_USERINFO));
 
@@ -176,12 +195,7 @@ export default function PortalLayout({ children }) {
                                 </div> */}
 
                 <div className="ml-auto flex gap-2 items-center">
-                  <NotificationsIcon
-                    className="text-gray-600 "
-                    sx={{ fontSize: 20 }}
-                  />
-
-                  <div className="flex items-center gap-2">
+                       <div className="flex items-center gap-2">
                     <AccountCircleIcon
                       className="text-gray-600 "
                       sx={{ fontSize: 22 }}
@@ -210,9 +224,10 @@ export default function PortalLayout({ children }) {
                       >
                         <Popover.Panel className="absolute right-10 bg-gray-50 border-2 border-gray-300 shadow-lg rounded-md  w-[150px] text-black">
                           <div>
+                       
                             <div
                               className="flex text-gray-600 gap-6 p-2 cursor-pointer"
-                              //onClick={() => handleLogout()}
+                              onClick={() => handleLogout()}
                             >
                               <PowerSettingsNewIcon className="text-gray-600" />
                               <h1>LogOut</h1>
@@ -255,49 +270,14 @@ export default function PortalLayout({ children }) {
               <div>
                              
                 <ul className={`w-[100%]`}>
-{/*                   
-                  <li>
-                    <div
-                      onClick={() => route("/patient/patientdashboard")}
-                      className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
-                        location.pathname === "/patient/patientdashboard" ||
-                        location.pathname === "/patient/patientdashboard/add"
-                          ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
-                          : " mr-2 rounded-md"
-                      }  ${open ? "ml-6" : "ml-0"}  `}
-                    >
-                      <SpaceDashboardIcon
-                        className={`!text-5xl ${
-                          open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
-                        } rounded-full p-[12px] ml-[-1.2rem] ${
-                          location.pathname === "/patient/patientdashboard"
-                            ? "bg-white text-gray-600"
-                            : ""
-                        } `}
-                        sx={{
-                          boxShadow:
-                            location.pathname === "/patient/patientdashboard"
-                              ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
-                              : "",
-                        }}
-                      />
-                      <span
-                        className={`flex-1 font-[600]  text-left ml-[2px] text-[13px] ${
-                          !open ? "hidden" : "block"
-                        }`}
-                      >
-                        Dashboard
-                        
-                      </span>
-                    </div>
-                  </li> */}
+
 
                   <li>
                     <div
-                      onClick={() => route("/patient/patients")}
+                      onClick={() => route("/reception/patients")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
-                        location.pathname === "/patient/patients" ||
-                        location.pathname === "/patient/patients/add"
+                        location.pathname === "/reception/patients" ||
+                        location.pathname === "/reception/patients/add"
                           ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
                           : " mr-2 rounded-md"
                       }  ${open ? "ml-6" : "ml-0"}  `}
@@ -306,13 +286,13 @@ export default function PortalLayout({ children }) {
                         className={`!text-5xl ${
                           open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
                         } rounded-full p-[12px] ml-[-1.2rem] ${
-                          location.pathname === "/patient/patients"
+                          location.pathname === "/reception/patients"
                             ? "bg-white text-gray-600"
                             : ""
                         } `}
                         sx={{
                           boxShadow:
-                            location.pathname === "/patient/patients"
+                            location.pathname === "/reception/patients"
                               ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
                               : "",
                         }}
