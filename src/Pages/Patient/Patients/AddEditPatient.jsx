@@ -83,7 +83,7 @@ const AddEditPatient = () => {
         await patientService.updatePatient(id, patientData);
         toast.success("Patient updated successfully!"); // Success message
       } else {
-        await patientService.createpr(patientData);
+        await patientService.create(patientData);
         toast.success("Patient added successfully!"); // Success message
       }
       navigate("/reception/patients"); // Redirect after submission
