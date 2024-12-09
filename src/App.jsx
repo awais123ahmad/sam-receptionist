@@ -35,12 +35,14 @@ function App() {
     <>
       <Toaster position="top-center" /> 
       <PortalLayout>
+        
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/reception/patients" element={isAuthenticated ? <Patients /> : <Navigate to="/" />} />
           <Route path="/reception/patients/:id" element={<PatientDetails />} />
           <Route path="/reception/patients/AddEdit" element={<AddEditPatient />} />
         </Routes>
+        
       </PortalLayout>
     </>
   );
