@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-center" /> {/* Add Toaster here */}
+      <Toaster position="top-center" /> 
       <PortalLayout>
         <Routes>
           <Route path="/" element={<LoginPage />} />

@@ -8,14 +8,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../assets/logo.png";
-
 import { Popover, Transition } from "@headlessui/react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -262,7 +260,7 @@ export default function PortalLayout({ children }) {
                   src={logo}
                   alt=""
                   className={`${
-                    open ? "w-[5rem]" : "w-[3rem]"
+                    open ? "w-[6rem]" : "w-[3rem]"
                   }  ml-auto mr-auto my-4`}
                 />
               </div>
