@@ -6,7 +6,6 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-
 import PortalLayout from "./Components/PortalLayout";
 import Patients from "./Pages/Patient/Patients/Patients";
 import AddEditPatient from "./Pages/Patient/Patients/AddEditPatient";
-import PatientDashboard from "./Pages/Patient/Patient_Dashboard/PatientDashboard"
 import PatientDetails from "./Pages/Patient/Patients/PatientDetails";
 import LoginPage from "./Pages/Login/Login"
 import Cookies from 'js-cookie';
@@ -41,7 +40,6 @@ function App() {
           <Route path="/reception/patients" element={isAuthenticated ? <Patients /> : <Navigate to="/" />} />
           <Route path="/reception/patients/:id" element={<PatientDetails />} />
           <Route path="/reception/patients/AddEdit" element={<AddEditPatient />} />
-          <Route path="/reception/patientdashboard" element={<PatientDashboard />} />
         </Routes>
       </PortalLayout>
     </>
