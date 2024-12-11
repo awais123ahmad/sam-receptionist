@@ -272,10 +272,10 @@ export default function PortalLayout({ children }) {
 
                   <li>
                     <div
-                      onClick={() => route("/reception/patients")}
+                      onClick={() => route("/receptionist/patients")}
                       className={`flex items-center p-2 cursor-pointer  text-gray-600 mt-3 h-[2.6rem] ${
-                        location.pathname === "/reception/patients" ||
-                        location.pathname === "/reception/patients/add"
+                        location.pathname === "/receptionist/patients" ||
+                        location.pathname === "/receptionist/patients/add"
                           ? "bg-gray-800 text-white mr-2 rounded-md font-[600]"
                           : " mr-2 rounded-md"
                       }  ${open ? "ml-6" : "ml-0"}  `}
@@ -284,13 +284,13 @@ export default function PortalLayout({ children }) {
                         className={`!text-5xl ${
                           open ? "mr-4" : "mr-auto ml-2 hover:!text-[3.5rem]"
                         } rounded-full p-[12px] ml-[-1.2rem] ${
-                          location.pathname === "/reception/patients"
+                          location.pathname === "/receptionist/patients"
                             ? "bg-white text-gray-600"
                             : ""
                         } `}
                         sx={{
                           boxShadow:
-                            location.pathname === "/reception/patients"
+                            location.pathname === "/receptionist/patients"
                               ? "2px 5px 10px rgba(0, 0, 0, 0.2)"
                               : "",
                         }}

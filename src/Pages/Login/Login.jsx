@@ -34,7 +34,7 @@ const Login = () => {
       Cookies.set("XIOQUNVU1RPTUVSLUFVVEhFTlRJQ0FUSU9OIMSLQ1JFVC1LRVk=", response.token, { expires: 1 });
   
       // Redirect to dashboard
-      navigate("/reception/patients");
+      navigate("/receptionist/patients");
     } catch (error) {
       toast.error(error.message || "Login failed. Please try again.");
     }
