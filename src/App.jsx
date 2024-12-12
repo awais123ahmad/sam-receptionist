@@ -17,7 +17,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Redirect to login if not authenticated
+  // // Redirect to login if not authenticated
   useEffect(() => {
     if (!isAuthenticated && location.pathname !== "/") {
       navigate("/");
@@ -38,7 +38,7 @@ function App() {
         
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/receptionist/patients" element={isAuthenticated ? <Patients /> : <Navigate to="/" />} />
+          <Route path="/receptionist/patients" element={<Patients /> } />
           <Route path="/receptionist/patients/:id" element={<PatientDetails />} />
           <Route path="/receptionist/patients/AddEdit" element={<AddEditPatient />} />
         </Routes>
