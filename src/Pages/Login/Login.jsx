@@ -92,7 +92,7 @@ const Login = () => {
                   className="border-b-2 rounded-md border-gray-200 p-2 w-[90%] mt-5 focus:outline-none focus:border-[#1EA56C]"
                 />
 
-<IconButton
+                <IconButton
                   onClick={handleClickShowPassword}
                   className="absolute right-12 top-4 transform -translate-y-1/2"
                 >

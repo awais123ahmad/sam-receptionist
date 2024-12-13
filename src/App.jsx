@@ -32,19 +32,16 @@
     
 
     return (
-        <PortalLayout>
+       
           <Routes>
-  
           <Route path="/" element={<Navigate to="/receptionist" replace />} />
-
-          <Route path="/receptionist" element={isAuthenticated ? <Patients /> : <Navigate to="/login" />} />
+          <Route path="/receptionist" element={isAuthenticated ? <PortalLayout> <Patients /> </PortalLayout> : <Navigate to="/login" />} />
 
           <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/receptionist" />} />
-          <Route path="/receptionist/:id" element={isAuthenticated ? <PatientDetails /> : <Navigate to="/login" />} />
-          <Route path="/receptionist/AddEdit" element={isAuthenticated ? <AddEditPatient /> : <Navigate to="/login" />} />
-
+          <Route path="/receptionist/:id" element={isAuthenticated ? <PortalLayout> <PatientDetails /> </PortalLayout> : <Navigate to="/login" />} />
+          <Route path="/receptionist/AddEdit" element={isAuthenticated ? <PortalLayout>  <AddEditPatient /> </PortalLayout> : <Navigate to="/login" />} />
           </Routes>
-        </PortalLayout>
+     
     );
   }
 
