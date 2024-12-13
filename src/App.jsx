@@ -1,51 +1,51 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./index.css";
-import { BrowserRouter} from "react-router-dom";
-import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import PortalLayout from "./Components/PortalLayout";
-import Patients from "./Pages/Patient/Patients/Patients";
-import AddEditPatient from "./Pages/Patient/Patients/AddEditPatient";
-import PatientDetails from "./Pages/Patient/Patients/PatientDetails";
-import LoginPage from "./Pages/Login/Login"
-import Cookies from 'js-cookie';
-import { Toaster } from "react-hot-toast"; 
+  import { useEffect, useState } from "react";
+  import reactLogo from "./assets/react.svg";
+  import "./index.css";
+  import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+  import PortalLayout from "./Components/PortalLayout";
+  import Patients from "./Pages/Patient/Patients/Patients";
+  import AddEditPatient from "./Pages/Patient/Patients/AddEditPatient";
+  import PatientDetails from "./Pages/Patient/Patients/PatientDetails";
+  import Login from "./Pages/Login/Login"
+  import Cookies from 'js-cookie';
+  import { Toaster } from "react-hot-toast"; 
 
-function App() {
-  const [count, setCount] = useState(0);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+  function App() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate()
 
-  // // Redirect to login if not authenticated
-  useEffect(() => {
-    if (!isAuthenticated && location.pathname !== "/") {
-      navigate("/");
-    }
-  }, [isAuthenticated, location.pathname, navigate]);
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate('/login')
+      }
+    }, [isAuthenticated])
 
-  // Check authentication status on page load
-  useEffect(() => {
-    setIsAuthenticated(
-      Boolean(Cookies.get("XIOQUNVU1RPTUVSLUFVVEhFTlRJQ0FUSU9OIMSLQ1JFVC1LRVk="))
+    useEffect(() => {
+      const token = Cookies.get("XIOQUNVU1RPTUVSLUFVVEhFTlRJQ0FUSU9OIMSLQ1JFVC1LRVk=");
+      if (token) {
+        setIsAuthenticated(true);  // User is authenticated
+      } else {
+        setIsAuthenticated(false); // No token found, set to false
+      }
+    }, [location.pathname]);  // Check authentication on path change
+    
+
+    return (
+        <PortalLayout>
+          <Routes>
+  
+          <Route path="/" element={<Navigate to="/receptionist" replace />} />
+
+          <Route path="/receptionist" element={isAuthenticated ? <Patients /> : <Navigate to="/login" />} />
+
+          <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/receptionist" />} />
+          <Route path="/receptionist/:id" element={isAuthenticated ? <PatientDetails /> : <Navigate to="/login" />} />
+          <Route path="/receptionist/AddEdit" element={isAuthenticated ? <AddEditPatient /> : <Navigate to="/login" />} />
+
+          </Routes>
+        </PortalLayout>
     );
-  }, [location.pathname]);
+  }
 
-  return (
-    <>
-      <Toaster position="top-center" /> 
-      <PortalLayout>
-        
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/receptionist/patients" element={<Patients /> } />
-          <Route path="/receptionist/patients/:id" element={<PatientDetails />} />
-          <Route path="/receptionist/patients/AddEdit" element={<AddEditPatient />} />
-        </Routes>
-        
-      </PortalLayout>
-    </>
-  );
-}
-
-export default App;
+  export default App;
