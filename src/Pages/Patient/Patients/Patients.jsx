@@ -11,8 +11,8 @@ const Patients = () => {
   const [searchData, setSearchData] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [paginatedData, setPaginatedData] = useState([]);
-  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,44 +26,42 @@ const Patients = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        toast.error('Error fetching Patients');
+        toast.error("Error fetching Patients");
       }
     };
     getPatients();
   }, []);
 
   useEffect(() => {
-    const filteredResult = patients?.filter(
-      (item) =>
+    const filteredResult = 
+      patients?.filter((item) =>
         item?.contact_number?.toLowerCase().includes(searchData.toLowerCase()) ||
-      item?.CNIC?.toLowerCase().includes(searchData.toLowerCase())
-    ) || [];
+        item?.CNIC?.toLowerCase().includes(searchData.toLowerCase())
+      ) || [];
     setFilteredData(filteredResult);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to page 1 on filter change
   }, [searchData, patients]);
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    setPaginatedData(filteredData?.slice(startIndex, endIndex) || []);
+    setPaginatedData(filteredData.slice(startIndex, endIndex) || []);
   }, [currentPage, filteredData]);
 
-  // Utility function to format date
-const formatDate = (dateString) => {
-  if (!dateString) return ''; // Handle null or undefined
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
-};
-
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
 
   return (
     <div>
       <div className="p-4">
         <h1 className="ml-[3%] text-[19px] text-gray-700 font-[700]">Patients Table</h1>
         <h1 className="ml-[3%] text-[13px] text-gray-700 mb-4">{filteredData?.length || 0} records found</h1>
-        
+
         <div className="flex mt-8 flex-row-reverse justify-between px-[3%]">
-          <Link to='AddEdit'>
+          <Link to="AddEdit">
             <button className="bg-[#232233] h-[2rem] px-4 rounded-md text-white font-[600] text-[14px]">
               + Enter Patient
             </button>
@@ -84,18 +82,21 @@ const formatDate = (dateString) => {
           <table className="w-[100%]">
             <thead>
               <tr className="capitalize leading-normal text-white">
-              <th className="py-[2%] w-[10%] text-[.8rem] text-left pl-4">Patient NO.</th>
-              <th className="py-[2%] w-[20%] text-[.8rem] text-left pl-4">Check up Date</th>
-              <th className="py-[2%] w-[20%] text-[.8rem] text-left pl-4">Patient Name</th>
-              <th className="py-[2%] w-[10%] text-[.8rem] text-left">Contact Number</th>
-              <th className="py-[2%] w-[10%] text-[.8rem] text-center">CNIC</th>
-              <th className="py-[2%] w-[20%] text-[.8rem] text-center">Address</th>
-              <th className="py-[2%] w-[10%] text-[.8rem] text-center">Action</th>
+                <th className="py-[2%] w-[10%] text-[.8rem] text-left pl-4">Patient NO.</th>
+                <th className="py-[2%] w-[20%] text-[.8rem] text-left pl-4">Check up Date</th>
+                <th className="py-[2%] w-[20%] text-[.8rem] text-left pl-4">Patient Name</th>
+                <th className="py-[2%] w-[10%] text-[.8rem] text-left">Contact Number</th>
+                <th className="py-[2%] w-[10%] text-[.8rem] text-center">CNIC</th>
+                <th className="py-[2%] w-[20%] text-[.8rem] text-center">Address</th>
+                <th className="py-[2%] w-[10%] text-[.8rem] text-center">Action</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedData?.map((patient) => (
-                <tr key={patient?.patient_id} className="bg-white text-gray-600 text-sm font-light border-t-[1px] border-gray-200">
+              {paginatedData.map((patient) => (
+                <tr
+                  key={patient?.patient_id}
+                  className="bg-white text-gray-600 text-sm font-light border-t-[1px] border-gray-200"
+                >
                   <td className="w-[10%] text-left">
                     <p className="font-[600] text-gray-600 text-[14px] text-center">{patient?.patient_id}</p>
                   </td>
@@ -126,7 +127,7 @@ const formatDate = (dateString) => {
         </div>
 
         <PaginationComponent
-          data={filteredData}
+          filteredData={filteredData}
           setPaginatedData={setPaginatedData}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}

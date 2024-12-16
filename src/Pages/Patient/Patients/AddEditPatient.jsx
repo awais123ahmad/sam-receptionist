@@ -86,7 +86,7 @@ const AddEditPatient = () => {
         await patientService.create(patientData);
         toast.success("Patient added successfully!"); // Success message
       }
-      navigate("/receptionist/patients"); // Redirect after submission
+      navigate("/receptionist"); // Redirect after submission
     } catch (error) {
       toast.error("Error saving patient."); // Error message
     }

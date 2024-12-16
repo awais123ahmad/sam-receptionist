@@ -6,14 +6,39 @@ import {
   Document,
   StyleSheet,
   Image,
+  Font
 } from "@react-pdf/renderer";
 import logo from "../../assets/logo.png";
+
+import MontserratRegular from "../../assets/fonts/Montserrat-Regular.ttf";  
+import MontserratBold from "../../assets/fonts/Montserrat-Bold.ttf";
+import OpenSansRegular from "../../assets/fonts/OpenSans-Regular.ttf";  
+import OpenSansSemiBold from "../../assets/fonts/OpenSans-SemiBold.ttf";
+import OpenSansBold from "../../assets/fonts/OpenSans-Bold.ttf";
+
+// Register Montserrat fonts
+// Font.register({
+//   family: "Montserrat",
+//   fonts: [
+//     { src: MontserratRegular, fontWeight: "normal" },
+//     { src: MontserratBold, fontWeight: "bold" },
+//   ],
+// });
+
+Font.register({
+  family: "OpenSans",
+  fonts: [
+    { src: OpenSansRegular, fontWeight: "normal" },
+    { src: OpenSansBold, fontWeight: "bold" },
+    { src: OpenSansSemiBold, fontWeight: "semi-bold" },
+  ],
+});
 
 const styles = StyleSheet.create({
   page: {
     padding: 20,
     fontSize: 12,
-    fontFamily: "Helvetica",
+    fontFamily: "OpenSans",
   },
   header: {
     flexDirection: "row",
@@ -24,13 +49,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 10,
   },
-  logo: { width: 40, height: 40 },
-  title: { fontSize: 16, fontWeight: "bold" },
+  logo: { width: 65, height: 60 },
+  title: { fontSize: 18, fontWeight: "bold", marginBottom:"2" },
   section: { marginBottom: 10 },
   sectionTitle: { fontSize: 14, fontWeight: "bold", marginBottom: 2 },
   text: { lineHeight: 1.5 },
   table: {
-    marginVertical: 10,
+    marginVertical: 5,
     borderWidth: 1,
     borderColor: "#000",
     marginBottom: 10,
@@ -114,9 +139,9 @@ const PatientReport = ({ patient }) => (
         <View
           style={{
             flexDirection: "row",
-            alignItems: "center",
+            alignItems: "left",
             flex: 1,
-            justifyContent: "center",
+            justifyContent: "left",
           }}
         >
           <Image style={styles.logo} src={logo} />
@@ -130,13 +155,13 @@ const PatientReport = ({ patient }) => (
           }}
         >
           <Text style={styles.title}>Said Ahmed Memorial Hospital</Text>
-          <Text style={styles.address}>XYZ GT Road, Lahore</Text>
+          <Text style={styles.address}>China Road,China Scheme, Lahore</Text>
         </View>
         <View
           style={{
             flexDirection: "column",
-            justifyContent: "left",
-            alignItems: "left",
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
             flex: 1,
           }}
         >

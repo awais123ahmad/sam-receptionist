@@ -68,7 +68,7 @@ const PatientDetails = () => {
     <div className="max-w-5xl mx-auto p-4 bg-gray-100">
       <div className="flex justify-between items-center border-b-2 pb-4 mb-3">
         <div className="flex items-center space-x-4">
-          <img src={logo} alt="Logo" className="w-12 h-12" />
+          <img src={logo} alt="Logo" className="w-16 h-15" />
         </div>
         <div className="flex flex-col items-center space-x-4">
           <h1 className="text-2xl font-bold">Said Ahmed Memorial Hospital</h1>

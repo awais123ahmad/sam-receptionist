@@ -32,7 +32,6 @@
     
 
     return (
-       
           <Routes>
           <Route path="/" element={<Navigate to="/receptionist" replace />} />
           <Route path="/receptionist" element={isAuthenticated ? <PortalLayout> <Patients /> </PortalLayout> : <Navigate to="/login" />} />
@@ -41,7 +40,7 @@
           <Route path="/receptionist/:id" element={isAuthenticated ? <PortalLayout> <PatientDetails /> </PortalLayout> : <Navigate to="/login" />} />
           <Route path="/receptionist/AddEdit" element={isAuthenticated ? <PortalLayout>  <AddEditPatient /> </PortalLayout> : <Navigate to="/login" />} />
           </Routes>
-     
+          
     );
   }
 

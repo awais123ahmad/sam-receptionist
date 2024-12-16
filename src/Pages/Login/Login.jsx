@@ -6,6 +6,7 @@ import loginService from "../../Services/loginService";
 import { Button, Grid, TextField, IconButton } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import logo from "../../assets/logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -66,12 +67,13 @@ const Login = () => {
           <div className="relative px-4 py-10 bg-zinc-200 shadow-lg sm:rounded-md sm:p-20">
             <div className="max-w-md mx-auto">
               <div>
-                <h1 className="text-2xl font-semibold text-center mb-6">
-                  Login
-                </h1>
-                <h2 className="text-xl font-semibold text-center mb-6">
-                  Said Ahmed Memorial Hospital
-                </h2>
+                <div className="text-center mb-6">
+                  <img
+                    src={logo}
+                    alt="Hospital Logo"
+                    className="mx-auto w-30 h-28"
+                  />
+                </div>
               </div>
               <div className="divide-y divide-gray-200">
                 <input
@@ -84,7 +86,7 @@ const Login = () => {
                 />
 
                 <input
-                   type={showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   value={data.password}
                   onChange={(e) => handleChange(e.target.value, "password")}
@@ -104,7 +106,7 @@ const Login = () => {
 
                 <div className="flex justify-center">
                   <button
-                    className={`bg-[#0077B6] hover:border-none text-white hover:text-white p-2 px-10 rounded-md mt-10 font-semibold shadow-md hover:shadow-slate-700 duration-300 ${
+                    className={`bg-[#787878] hover:border-none text-white hover:text-white p-2 px-10 rounded-md mt-10 font-semibold shadow-md hover:shadow-slate-700 duration-300 ${
                       loading ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                     onClick={handleSubmit}
