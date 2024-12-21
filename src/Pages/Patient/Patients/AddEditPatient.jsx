@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Divider,
-  Grid,
-  TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-} from "@mui/material";
+import { Button, Divider, Grid, TextField, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import patientService from "../../../Services/patientService";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,9 +16,9 @@ const AddEditPatient = () => {
     CNIC: "",
   });
 
-  const [doctorData, setDoctorData] = useState([]);
+  const [doctorData, setDoctorData] = useState([]); 
 
-  const { id } = useParams();
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,11 +40,14 @@ const AddEditPatient = () => {
   useEffect(() => {
     const getDoctors = async () => {
       try {
+        
         const response = await doctorService.fetchAllDoctors();
         console.log(response); // Log the response to confirm the structure
         setDoctorData(response.doctors); // Access the patients array within response
+       
       } catch (error) {
-        toast.error("Error fetching Doctors");
+       
+        toast.error('Error fetching Doctors');
       }
     };
     getDoctors();
@@ -88,7 +82,7 @@ const AddEditPatient = () => {
         toast.success("Patient updated successfully!"); // Success message
       } else {
         await patientService.create(patientData);
-        toast.success("Please Enter Checkup Data Now !");
+        toast.success("Please add Checkup now to Proceed!"); // Success message
       }
       navigate("/receptionist"); // Redirect after submission
     } catch (error) {
@@ -98,9 +92,7 @@ const AddEditPatient = () => {
 
   return (
     <form onSubmit={handleSubmit} className="w-[90%] m-auto">
-      <h1 className="m-[30px] text-center font-[700] text-[20px]">
-        {id ? "Edit Patient" : "Add Patient"}
-      </h1>
+      <h1 className="m-[30px] text-center font-[700] text-[20px]">{id ? "Edit Patient" : "Add Patient"}</h1>  
       <Divider />
       <div>
         <div className="mt-[20px] flex">
@@ -129,7 +121,8 @@ const AddEditPatient = () => {
         </div>
 
         <div className="grid grid-cols-3 my-[20px] gap-10">
-          <div>
+
+        <div>
             <TextField
               label="Date of Birth"
               variant="outlined"
@@ -177,6 +170,8 @@ const AddEditPatient = () => {
               }}
             />
           </div>
+
+          
         </div>
 
         <div className="mt-[20px] flex">
@@ -205,6 +200,7 @@ const AddEditPatient = () => {
           />
         </div>
 
+   
         <Grid container style={{ justifyContent: "center", marginTop: "30px" }}>
           <Button
             variant="contained"
