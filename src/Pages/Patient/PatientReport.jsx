@@ -16,15 +16,6 @@ import OpenSansRegular from "../../assets/fonts/OpenSans-Regular.ttf";
 import OpenSansSemiBold from "../../assets/fonts/OpenSans-SemiBold.ttf";
 import OpenSansBold from "../../assets/fonts/OpenSans-Bold.ttf";
 
-// Register Montserrat fonts
-// Font.register({
-//   family: "Montserrat",
-//   fonts: [
-//     { src: MontserratRegular, fontWeight: "normal" },
-//     { src: MontserratBold, fontWeight: "bold" },
-//   ],
-// });
-
 Font.register({
   family: "OpenSans",
   fonts: [
@@ -46,20 +37,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#000",
-    marginBottom: 10,
-    paddingBottom: 10,
+    marginBottom: 5,
+    paddingBottom: 5,
   },
-  logo: { width: 65, height: 60 },
+  logo: { width: 80, height: 80 },
   title: { fontSize: 18, fontWeight: "bold", marginBottom:"2" },
-  section: { marginBottom: 10 },
+  section: { marginBottom: 5 },
   sectionTitle: { fontSize: 14, fontWeight: "bold", marginBottom: 2 },
   text: { lineHeight: 1.5 },
   table: {
     marginVertical: 5,
     borderWidth: 1,
     borderColor: "#000",
-    marginBottom: 10,
+    marginBottom: 5,
   },
+  // tableContainer: {
+  //   width: "70%", // Set the container width to 70% of the parent (screen/page)
+  //   alignSelf: "left", // Center the table horizontally
+  //   marginVertical: 5,
+  // },
   tableRow: {
     flexDirection: "row",
     borderBottomWidth: 1,
@@ -75,6 +71,14 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     fontSize: 12,
   },
+  tableCellText: {
+    width: 80, // Fixed width for "Age" text
+    padding: 5,
+    borderRightWidth: 1,
+    borderColor: "#000",
+    fontSize: 12,
+    textAlign: "center",
+  },
   tableCellLast: {
     flex: 1,
     padding: 5,
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
   contentRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    marginTop: 5,
   },
   leftColumn: {
     width: "30%",
@@ -96,7 +100,13 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   doctorName: {
-    fontWeight: "bold", // Make the name bold
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  tempName: {
+    fontWeight: "bold",
+    fontSize: 14,
+    marginTop: 10,
   },
   doctorQualification: {
     fontSize: 10, // Make the qualification smaller
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
     marginVertical: 10, // Spacing around the line
   },
   marginBottomtemp: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
 });
 
@@ -132,7 +142,7 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString('en-US', options);
 };
 
-const PatientReport = ({ patient }) => (
+const PatientReport = ({ patient, doctor }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
@@ -154,7 +164,7 @@ const PatientReport = ({ patient }) => (
             flex: 2,
           }}
         >
-          <Text style={styles.title}>Said Ahmed Memorial Hospital</Text>
+          <Text style={styles.title}>Said Ahmed Medical Centre</Text>
           <Text style={styles.address}>China Road,China Scheme, Lahore</Text>
         </View>
         <View
@@ -165,35 +175,48 @@ const PatientReport = ({ patient }) => (
             flex: 1,
           }}
         >
-          <Text style={styles.doctorDetails}>{formatDate(patient?.checkup_date)}</Text>
           <Text style={styles.doctorName}>{patient.doctor_name}</Text>
           <Text style={styles.doctorQualification}>
           {patient.specialization}
           </Text>
-
-          <Text style={styles.doctorDetails}>
-            Patient No: {patient.patient_id || "0000"}{" "}
+          <Text style={styles.doctorQualification}>
+          {doctor?.qualification}
           </Text>
+
+          
         </View>
       </View>
 
-      <View style={styles.section}>
+      <View style={[styles.section, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }]}>
         <Text style={styles.sectionTitle}>
-          Patient: {patient.full_name || "John Doe"}
+          Patient Name: {patient.full_name || "John Doe"}
         </Text>
+
+        <View style={styles.section}>
+
+        <Text style={styles.doctorDetails}>
+           {formatDate(patient?.checkup_date)}
+        </Text>
+
+        <Text style={styles.doctorDetails}>
+            Patient No: {patient.patient_id || "0000"}{" "}
+          </Text>
+
+        </View>
       </View>
 
       <View style={styles.table}>
         <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>Age</Text>
+          <Text style={styles.tableCellText}>Age</Text>
           <Text style={styles.tableCell}> {patient.age || calculateAge(patient.date_of_birth)}</Text>
-          <Text style={styles.tableCell}>Gender</Text>
-          <Text style={styles.tableCellLast}>{patient.gender || "Male"}</Text>
+          <Text style={styles.tableCellText}>Gender</Text>
+          <Text style={styles.tableCell}>{patient.gender || "Male"}</Text>
         </View>
       </View>
 
+
       <View style={styles.section}>
-        <Text style={[styles.doctorName, styles.marginBottomtemp]}>Temp:</Text>
+        <Text style={[styles.tempName, styles.marginBottomtemp]}>Temp:</Text>
         <Text style={[styles.doctorName, styles.marginBottomtemp]}>B/P:</Text>
         <Text style={styles.doctorName}>Pulse Rate:</Text>
       </View>
@@ -238,3 +261,6 @@ const PatientReport = ({ patient }) => (
 );
 
 export default PatientReport;
+
+
+

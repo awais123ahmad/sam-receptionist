@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Button, Divider, Grid, TextField, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
+import {
+  Button,
+  Divider,
+  Grid,
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import patientService from "../../../Services/patientService";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,15 +21,13 @@ const AddEditPatient = () => {
     gender: "",
     date_of_birth: "",
     address: "",
-    checkup_date: "",
-    assigned_doctor: "", 
+    checkup_date: new Date().toISOString().split("T")[0],
     CNIC: "",
-    amount: "",
   });
 
-  const [doctorData, setDoctorData] = useState([]); 
+  const [doctorData, setDoctorData] = useState([]);
 
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,14 +49,11 @@ const AddEditPatient = () => {
   useEffect(() => {
     const getDoctors = async () => {
       try {
-        
         const response = await doctorService.fetchAllDoctors();
         console.log(response); // Log the response to confirm the structure
         setDoctorData(response.doctors); // Access the patients array within response
-       
       } catch (error) {
-       
-        toast.error('Error fetching Doctors');
+        toast.error("Error fetching Doctors");
       }
     };
     getDoctors();
@@ -84,7 +88,7 @@ const AddEditPatient = () => {
         toast.success("Patient updated successfully!"); // Success message
       } else {
         await patientService.create(patientData);
-        toast.success("Patient added successfully!"); // Success message
+        toast.success("Please Enter Checkup Data Now !");
       }
       navigate("/receptionist"); // Redirect after submission
     } catch (error) {
@@ -94,7 +98,9 @@ const AddEditPatient = () => {
 
   return (
     <form onSubmit={handleSubmit} className="w-[90%] m-auto">
-      <h1 className="m-[30px] text-center font-[700] text-[20px]">{id ? "Edit Patient" : "Add Patient"}</h1>  
+      <h1 className="m-[30px] text-center font-[700] text-[20px]">
+        {id ? "Edit Patient" : "Add Patient"}
+      </h1>
       <Divider />
       <div>
         <div className="mt-[20px] flex">
@@ -124,6 +130,22 @@ const AddEditPatient = () => {
 
         <div className="grid grid-cols-3 my-[20px] gap-10">
           <div>
+            <TextField
+              label="Date of Birth"
+              variant="outlined"
+              fullWidth
+              type="date"
+              name="date_of_birth"
+              value={patientData.date_of_birth}
+              onChange={handleChange}
+              required
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
+
+          <div>
             <FormControl fullWidth>
               <InputLabel>Gender</InputLabel>
               <Select
@@ -142,12 +164,12 @@ const AddEditPatient = () => {
 
           <div>
             <TextField
-              label="Date of Birth"
+              label="CheckUp Date"
               variant="outlined"
               fullWidth
               type="date"
-              name="date_of_birth"
-              value={patientData.date_of_birth}
+              name="checkup_date"
+              value={patientData.checkup_date}
               onChange={handleChange}
               required
               InputLabelProps={{
@@ -181,56 +203,6 @@ const AddEditPatient = () => {
             onChange={handleChange}
             required
           />
-        </div>
-
-        <div className="grid grid-cols-3 my-[20px] gap-10">
-          <div>
-            <TextField
-              label="CheckUp Date"
-              variant="outlined"
-              fullWidth
-              type="date"
-              name="checkup_date"
-              value={patientData.checkup_date}
-              onChange={handleChange}
-              required
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-
-          <div style={{  }}>
-            <TextField
-              label="Amount"
-              variant="outlined"
-              fullWidth
-              type="number"
-              name="amount"
-              value={patientData.amount}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div>
-            <FormControl fullWidth>
-              <InputLabel>Assigned Doctor</InputLabel>
-              <Select
-                label="Assigned Doctor"
-                name="assigned_doctor"
-                value={patientData.assigned_doctor} // Set the selected doctor's ID
-                onChange={handleChange}
-                required
-              >
-                {doctorData.map((doctors) => (
-                  <MenuItem key={doctors.id} value={doctors.id}>
-                    {doctors.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
         </div>
 
         <Grid container style={{ justifyContent: "center", marginTop: "30px" }}>

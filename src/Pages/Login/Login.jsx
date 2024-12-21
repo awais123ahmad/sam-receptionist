@@ -51,7 +51,7 @@ const Login = () => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      handleSubmit();
+      handleSubmit(event);
     }
   };
 

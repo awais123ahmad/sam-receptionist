@@ -9,6 +9,7 @@
   import Login from "./Pages/Login/Login"
   import Cookies from 'js-cookie';
   import { Toaster } from "react-hot-toast"; 
+import AddEditCheckup from "./Pages/Patient/Checkup/AddEditCheckup";
 
   function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -30,7 +31,6 @@
       }
     }, [location.pathname]);  // Check authentication on path change
     
-
     return (
           <Routes>
           <Route path="/" element={<Navigate to="/receptionist" replace />} />
@@ -39,6 +39,9 @@
           <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/receptionist" />} />
           <Route path="/receptionist/:id" element={isAuthenticated ? <PortalLayout> <PatientDetails /> </PortalLayout> : <Navigate to="/login" />} />
           <Route path="/receptionist/AddEdit" element={isAuthenticated ? <PortalLayout>  <AddEditPatient /> </PortalLayout> : <Navigate to="/login" />} />
+
+          <Route path="/checkup" element={isAuthenticated ? <PortalLayout> <AddEditCheckup /> </PortalLayout> : <Navigate to="/login" />} />
+          
           </Routes>
           
     );

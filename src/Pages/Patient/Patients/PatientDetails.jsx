@@ -2,20 +2,33 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { pdf } from "@react-pdf/renderer"; // Import `pdf` for generating PDFs
 import patientService from "../../../Services/patientService";
+import doctorService from  "../../../Services/doctorService";
 import PatientReport from "../PatientReport";
 import logo from "../../../assets/logo.png";
 
 const PatientDetails = () => {
   const { id } = useParams();
+  const [doctor, setDoctor] = useState(null);
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchPatientDetails = async () => {
       try {
+        // Fetch patient details
         const response = await patientService.fetchPatientById(id);
         if (response && response.patient) {
           setPatient(response.patient);
+
+          // Fetch doctor details based on assigned_doctor_id
+          console.log("Fetching doctor details...");
+          const doctorResponse = await doctorService.fetchAllDoctors(
+            response.patient.assigned_doctor
+          );
+          if (doctorResponse && doctorResponse.doctors) {
+            setDoctor(doctorResponse.doctors);
+          }
         } else {
           setPatient(null);
         }
@@ -29,6 +42,41 @@ const PatientDetails = () => {
     fetchPatientDetails();
   }, [id]);
 
+  // useEffect(() => {
+  //   const fetchPatientDetails = async () => {
+  //     try {
+  //       // Fetch patient details
+  //       const response = await patientService.fetchPatientById(id);
+  //       if (response && response.patient) {
+  //         setPatient(response.patient);
+  
+  //         // Fetch all doctors
+  //         console.log("Fetching doctor details...");
+  //         const doctorResponse = await doctorService.fetchAllDoctors();
+  //         if (doctorResponse && doctorResponse.doctors) {
+  //           // Find the doctor where the ID matches the assigned_doctor ID
+  //           const assignedDoctor = doctorResponse.doctors.find(
+  //             (doctor) => doctor.id === response.patient.ass
+  //           );
+  //           setDoctor(assignedDoctor || null);
+  //         }
+  //         console.log("Doctor response:", doctorResponse);
+ 
+  //       } else {
+  //         setPatient(null);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching patient details:", error);
+  //       setPatient(null);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  
+  //   fetchPatientDetails();
+  // }, [id]);
+  
+
 
   const formatDate = (dateString) => {
     if (!dateString) return "";
@@ -37,7 +85,7 @@ const PatientDetails = () => {
   };
 
   const handlePrint = async () => {
-    const doc = <PatientReport patient={patient} />;
+    const doc = <PatientReport patient={patient} doctor={doctor} />;
     const blob = await pdf(doc).toBlob();
     const url = URL.createObjectURL(blob);
     const newWindow = window.open(url, "_blank");
@@ -78,6 +126,8 @@ const PatientDetails = () => {
           <p className="text-sm">{formatDate(patient?.checkup_date)}</p>
           <p className="text-sm">{patient.doctor_name}</p>
           <p className="text-sm">{patient.specialization}</p>
+          <p className="text-sm">{doctor?.name}</p>
+          <p className="text-sm">{doctor?.qualification || "N/A"}</p>
 
           <p className="text-lg font-semibold">
             Patient No: {patient.patient_id}
