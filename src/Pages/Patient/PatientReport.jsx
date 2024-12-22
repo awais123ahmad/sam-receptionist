@@ -180,7 +180,7 @@ const PatientReport = ({ patient, doctor }) => (
           {patient.specialization}
           </Text>
           <Text style={styles.doctorQualification}>
-          {doctor?.qualification}
+          {patient.qualification}
           </Text>
 
           

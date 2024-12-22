@@ -41,7 +41,21 @@ const saleService = {
             throw error.response.data;
         }
     },
-
+ 
+    fetchSale: async (id) => {
+        try {
+          const response = await axiosInstance.post('/sale/patient/', {
+            patient_id: id.toString(), // Pass the patient_id in the body
+          });
+          console.log('API Response:', response.data); // Log the response
+          return response.data;
+        } catch (error) {
+          console.error('API Error:', error); // Log the error for debugging
+          throw error.response?.data || 'Unknown error';
+        }
+      },
+      
+    
 };
 
 export default saleService;
