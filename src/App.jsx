@@ -22,14 +22,12 @@ import AddEditCheckup from "./Pages/Patient/Checkup/AddEditCheckup";
       }
     }, [isAuthenticated])
 
+
     useEffect(() => {
-      const token = Cookies.get("XIOQUNVU1RPTUVSLUFVVEhFTlRJQ0FUSU9OIMSLQ1JFVC1LRVk=");
-      if (token) {
-        setIsAuthenticated(true);  // User is authenticated
-      } else {
-        setIsAuthenticated(false); // No token found, set to false
-      }
-    }, [location.pathname]);  // Check authentication on path change
+      setIsAuthenticated(
+        Boolean(Cookies.get("XIOQUNVU1RPTUVSLUFVVEhFTlRJQ0FUSU9OIMSLQ1JFVC1LRVk="))
+      );
+    }, [location.pathname]);
     
     return (
           
