@@ -32,6 +32,7 @@ import AddEditCheckup from "./Pages/Patient/Checkup/AddEditCheckup";
     }, [location.pathname]);  // Check authentication on path change
     
     return (
+          
           <Routes>
           <Route path="/" element={<Navigate to="/receptionist" replace />} />
           <Route path="/receptionist" element={isAuthenticated ? <PortalLayout> <Patients /> </PortalLayout> : <Navigate to="/login" />} />

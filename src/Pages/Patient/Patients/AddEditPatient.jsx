@@ -157,7 +157,7 @@ const AddEditPatient = () => {
 
           <div>
             <TextField
-              label="CheckUp Date"
+              label="Register Date"
               variant="outlined"
               fullWidth
               type="date"

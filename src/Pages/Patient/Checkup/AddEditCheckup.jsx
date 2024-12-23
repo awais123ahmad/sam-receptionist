@@ -1,198 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import {
-//   Button,
-//   Divider,
-//   Grid,
-//   TextField,
-//   MenuItem,
-//   Select,
-//   InputLabel,
-//   FormControl,
-// } from "@mui/material";
-// import patientService from "../../../Services/patientService";
-// import toast from "react-hot-toast";
-// import { useNavigate, useParams } from "react-router-dom";
-// import doctorService from "../../../Services/doctorService";
-// import saleService from "../../../Services/saleService";
-
-// const AddEditCheckup = () => {
-//   const [checkupData, setCheckupData] = useState({
-//     patient_id: "",
-//     doc_id: "",
-//     fee: "",
-//     date: "",
-//   });
-
-//   const [patientData, setPatientData] = useState([]);
-//   const [doctorData, setDoctorData] = useState([]);
-
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (id) {
-//       // Fetch patient data for editing
-//       const fetchPatientData = async () => {
-//         try {
-//           const response = await patientService.fetchPatientById(id); // Use the fetchPatientById service method
-//           setCheckupData(response.patient); // Assuming response has a 'patient' object
-//         } catch (error) {
-//           toast.error("Error fetching patient data.");
-//         }
-//       };
-
-//       fetchPatientData();
-//     }
-//   }, [id]);
-
-//   useEffect(() => {
-//     const getPatients = async () => {
-//       try {
-//         const response = await patientService.fetchAllPatients();
-//         console.log(response); // Log the response to confirm the structure
-//         setPatientData(response.patients); // Access the patients array within response
-//       } catch (error) {
-//         toast.error("Error fetching Patients");
-//       }
-//     };
-//     getPatients();
-//   }, []);
-
-//   useEffect(() => {
-//     const getDoctors = async () => {
-//       try {
-//         const response = await doctorService.fetchAllDoctors();
-//         console.log(response); // Log the response to confirm the structure
-//         setDoctorData(response.doctors); // Access the patients array within response
-//       } catch (error) {
-//         toast.error("Error fetching Doctors");
-//       }
-//     };
-//     getDoctors();
-//   }, []);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setCheckupData({ ...checkupData, [name]: value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       if (id) {
-//         await saleService.update(id, checkupData);
-//         toast.success("Checkup Fee updated successfully!"); // Success message
-//       } else {
-//         await saleService.create(checkupData);
-//         toast.success("Checkup Fee added successfully!"); // Success message
-//       }
-//       navigate("/checkup"); // Redirect after submission
-//     } catch (error) {
-//       toast.error("Error saving Details."); // Error message
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="w-[90%] m-auto">
-//       <h1 className="m-[30px] text-center font-[700] text-[20px]">
-//         {id ? "Edit Checkup" : "Add Checkup Doctor"}
-//       </h1>
-//       <Divider />
-//       <div>
-//         <div className="grid grid-cols-3 my-[20px] gap-10">
-//           <div>
-//             <FormControl fullWidth>
-//               <InputLabel>Fetch Patients</InputLabel>
-//               <Select
-//                 label="Fetch Patients"
-//                 name="patient_id"
-//                 value={checkupData.patient_id} // Set the selected doctor's ID
-//                 onChange={handleChange}
-//                 required
-//               >
-//                 {patientData.map((patients) => (
-//                   <MenuItem
-//                     key={patients.patient_id}
-//                     value={patients.patient_id}
-//                   >
-//                     {patients.full_name} - {patients.patient_id}
-//                   </MenuItem>
-//                 ))}
-//               </Select>
-//             </FormControl>
-//           </div>
-
-//           <div>
-//             <FormControl fullWidth>
-//               <InputLabel>Fetch Doctors</InputLabel>
-//               <Select
-//                 label="Fetch Doctors"
-//                 name="doc_id"
-//                 value={checkupData.doc_id} // Set the selected doctor's ID
-//                 onChange={handleChange}
-//                 required
-//               >
-//                 {doctorData.map((doctors) => (
-//                   <MenuItem key={doctors.id} value={doctors.id}>
-//                     {doctors.name}
-//                   </MenuItem>
-//                 ))}
-//               </Select>
-//             </FormControl>
-//           </div>
-
-//           <div>
-//             <TextField
-//               label="CheckUp Date"
-//               variant="outlined"
-//               fullWidth
-//               type="date"
-//               name="date"
-//               value={checkupData.date}
-//               onChange={handleChange}
-//               required
-//               InputLabelProps={{
-//                 shrink: true,
-//               }}
-//             />
-//           </div>
-//         </div>
-
-//         <div className="mt-[20px] flex">
-//           <div style={{ width: "33%" }}>
-//             <TextField
-//               label="Checkup Fee"
-//               variant="outlined"
-//               fullWidth
-//               type="nummber"
-//               name="fee"
-//               value={checkupData.fee}
-//               onChange={handleChange}
-//               required
-//             />
-//           </div>
-//         </div>
-
-//         <Grid container style={{ justifyContent: "center", marginTop: "30px" }}>
-//           <Button
-//             variant="contained"
-//             type="submit"
-//             color="primary"
-//             size="large"
-//             className="!bg-gray-700 !text-white"
-//             style={{ borderRadius: "10px" }}
-//           >
-//             Save and Continue
-//           </Button>
-//         </Grid>
-//       </div>
-//     </form>
-//   );
-// };
-
-// export default AddEditCheckup;
-
-
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -228,6 +33,9 @@ const AddEditCheckup = () => {
   const [selectedPatientName, setSelectedPatientName] = useState("");
   const [selectedDoctorName, setSelectedDoctorName] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+const [searchData, setSearchData] = useState("");
+
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -271,23 +79,7 @@ const AddEditCheckup = () => {
     getDoctors();
   }, []);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setCheckupData({ ...checkupData, [name]: value });
 
-  //   // Update selected names
-  //   if (name === "patient_id") {
-  //     const selectedPatient = patientData.find(
-  //       (patient) => patient.patient_id === value
-  //     );
-  //     setSelectedPatientName(selectedPatient?.full_name || "");
-  //   }
-
-  //   if (name === "doc_id") {
-  //     const selectedDoctor = doctorData.find((doctor) => doctor.id === value);
-  //     setSelectedDoctorName(selectedDoctor?.name || "");
-  //   }
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -312,7 +104,7 @@ const AddEditCheckup = () => {
     }
   };
   
-  
+
   const handleFormSubmit = async () => {
     try {
       if (id) {
@@ -330,6 +122,10 @@ const AddEditCheckup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Set the selected patient's name in the state
+    if (selectedPatient) {
+      setSelectedPatientName(selectedPatient.full_name);
+    }
     setIsDialogOpen(true); // Open the confirmation dialog
   };
 
@@ -338,6 +134,27 @@ const AddEditCheckup = () => {
     if (confirm) {
       handleFormSubmit();
     }
+  };
+
+  // const handlePatientSelect = (patient) => {
+  //   setSelectedPatient(patient); // Save the selected patient
+  //   setSearchData(""); // Clear search input
+  //   setCheckupData((prevData) => ({
+  //     ...prevData,
+  //     patient_id: patient.patient_id // Store patient_id in checkupData
+  //   }));
+  // };
+
+  const handlePatientSelect = (patient) => {
+    setSelectedPatient(patient); // Save the selected patient
+    setSearchData(""); // Clear search input
+    setCheckupData((prevData) => ({
+      ...prevData,
+      patient_id: patient.patient_id, // Store patient_id in checkupData
+    }));
+  
+    // Ensure patient name is set correctly for the dialog confirmation
+    setSelectedPatientName(patient.full_name || "");
   };
 
   return (
@@ -349,25 +166,71 @@ const AddEditCheckup = () => {
       <div>
         <div className="grid grid-cols-3 my-[20px] gap-10">
           <div>
-            <FormControl fullWidth>
-              <InputLabel>Fetch Patients</InputLabel>
-              <Select
-                label="Fetch Patients"
-                name="patient_id"
-                value={checkupData.patient_id}
-                onChange={handleChange}
-                required
-              >
-                {patientData.map((patients) => (
-                  <MenuItem
-                    key={patients.patient_id}
-                    value={patients.patient_id}
+          <FormControl fullWidth>
+        <TextField
+          label="Search Patients"
+          placeholder="Type to search patients..."
+          value={searchData || selectedPatient?.full_name || ""}
+          onChange={(e) => {
+            setSearchData(e.target.value); // Update search input
+            if (selectedPatient) setSelectedPatient(null); // Clear selected patient when typing
+          }}
+          variant="outlined"
+          fullWidth
+        />
+        {searchData && (
+          <div className="relative">
+            <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-md max-h-48 overflow-y-auto mt-2">
+              <li className="px-4 py-2 font-bold bg-gray-100">
+                <table className="w-full">
+                  <thead>
+                    <tr>
+                      <th className="text-sm font-bold">Patient No.</th>
+                      <th className="text-sm font-bold">Name</th>
+                      <th className="text-sm font-bold">Phone No.</th>
+                    </tr>
+                  </thead>
+                </table>
+              </li>
+
+              {/* Render Patient Data */}
+              {patientData
+                .filter(
+                  (patient) =>
+                    patient.full_name
+                      ?.toLowerCase()
+                      .includes(searchData.toLowerCase()) ||
+                    patient.patient_id
+                      ?.toString()
+                      .toLowerCase()
+                      .includes(searchData.toLowerCase())
+                )
+                .slice(0, 10)
+                .map((patient) => (
+                  <li
+                    key={patient.patient_id}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => handlePatientSelect(patient)}
                   >
-                    {patients.full_name} - {patients.patient_id}
-                  </MenuItem>
+                    <table className="w-full">
+                      <tbody>
+                        <tr>
+                          <td className="text-sm">{patient.patient_id}</td>
+                          <td className="text-sm text-gray-600 px-10">
+                            {patient.full_name}
+                          </td>
+                          <td className="text-sm text-gray-600">
+                            {patient.contact_number}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
                 ))}
-              </Select>
-            </FormControl>
+            </ul>
+          </div>
+        )}
+      </FormControl>
           </div>
 
           <div>
@@ -417,6 +280,9 @@ const AddEditCheckup = () => {
               value={checkupData.fee}
               onChange={handleChange}
               required
+              InputProps={{
+                readOnly: true, // Makes the field read-only
+              }}
             />
           </div>
         </div>
