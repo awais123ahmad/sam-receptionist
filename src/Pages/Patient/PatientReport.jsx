@@ -189,7 +189,7 @@ const PatientReport = ({ patient, doctor }) => (
 
       <View style={[styles.section, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }]}>
         <Text style={styles.sectionTitle}>
-          Patient Name: {patient.full_name || "John Doe"}
+          Patient Name: {patient.patient_name || "John Doe"}
         </Text>
 
         <View style={styles.section}>
