@@ -3,7 +3,7 @@ import axiosInstance from "./axiosInstance";
 const loginService = {
     fetchAll: async () => {
         try {
-            const response = await axiosInstance.get('/dispenser/all');
+            const response = await axiosInstance.get('/reception/all');
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -12,7 +12,7 @@ const loginService = {
 
     fetchById: async (id) => {
         try {
-            const response = await axiosInstance.get(`/dispenser/id/${id}`);
+            const response = await axiosInstance.get(`/reception/id/${id}`);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -21,7 +21,7 @@ const loginService = {
 
     create: async (payload) => {
         try {
-            const response = await axiosInstance.post('/dispenser/register', payload);
+            const response = await axiosInstance.post('/reception/register', payload);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -30,7 +30,7 @@ const loginService = {
 
     update: async (id, payload) => {
         try {
-            const response = await axiosInstance.put(`/dispenser/edit/${id}`, payload);
+            const response = await axiosInstance.put(`/reception/edit/${id}`, payload);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -39,7 +39,7 @@ const loginService = {
 
     delete: async (id) => {
         try {
-            const response = await axiosInstance.delete(`/dispenser/delete/${id}`);
+            const response = await axiosInstance.delete(`/reception/delete/${id}`);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -48,7 +48,7 @@ const loginService = {
 
     login: async (payload) => {
         try {
-            const response = await axiosInstance.post(`/dispenser/login`, payload);
+            const response = await axiosInstance.post(`/reception/login`, payload);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
