@@ -27,7 +27,6 @@ const Patients = (patient) => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        toast.error("Error fetching Patients");
       }
     };
     getPatients();
@@ -140,7 +139,7 @@ const Patients = (patient) => {
                   </td>
                   <td className="py-[1%] w-[20%] text-left pl-4">
                     <p className="font-[600] text-gray-600 text-[14px]">
-                      {patient?.full_name}
+                    {patient?.full_name}
                     </p>
                   </td>
                   <td className="w-[10%] text-left">
