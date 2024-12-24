@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: "30%",
     paddingRight: 10,
     borderRightWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#000",
   },
   rightColumn: {
     width: "70%",
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1, // Thickness of the line
-    backgroundColor: "#ccc", // Line color
+    backgroundColor: "#000", // Line color
     marginVertical: 10, // Spacing around the line
   },
   marginBottomtemp: {
@@ -189,7 +189,7 @@ const PatientReport = ({ patient, doctor }) => (
 
       <View style={[styles.section, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }]}>
         <Text style={styles.sectionTitle}>
-          Patient Name: {patient.full_name || "John Doe"}
+          Patient Name: {patient.patient_name || "NULL"}
         </Text>
 
         <View style={styles.section}>
